@@ -1,2 +1,5 @@
 .idea/
 grill/names/__pycache__/
+grill/names/docs/build/
+grill/names/docs/Makefile
+grill/names/docs/make.bat
