@@ -58,39 +58,47 @@ templates_path = ['_templates']
 graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
 # graphviz_dot_args = ['- rankdir LR']
 # graphviz_dot_args = ['-Lg']
-graphviz_dot_args = [
-    '-Gbgcolor=transparent',
-    '-Gfontcolor=#2573a7',
-    # '-Nshape=oval',
-    # '-Nshape=circle',
-    '-Grankdir=TB',
-    # '-Gstyle=filled',
-    # '-Gfillcolor=yellow;0.3:blue'
-    # '-Gperipheries=1',
-    # '-Ncolor=#4399FF'
-    # '-Nstyle=filled',
-    # '-Nfillcolor=red'
-    '-Ncolor=#2573a7',
-    # '-Nstyle="filled"',
-    # '-Ncolor="blue"',
-    # '-Nstyle="filled" -Nfillcolor="#ddddff"',
-    # '-Nstyle=filled',
-    # '-Nbgcolor=#2980b9',
-    # '-Nfillcolor=red',
-    # '-Nstyle=filled',
-    '-Ecolor=#2573a7',
-    # '-Ecolor=#4399FF',
-    # '-Gbgcolor=# fcfcfc'
-# '-Lg'
-# '-Nshape=box'
-# '-Ncolor=black'
-# '-Gbgcolor=transparent', '-Nshape=sphere', '-Nfontname=courier'
-# '-Gfontname=Simsun', '-Efontname=Simsun', '-Nfontname=Simsun'
-# '-s32',
-# '-Gratio=compress'
-# '-Gsize=8.0,12.0',
-# '-Ncolor=#465158'
-]
+# graphviz_dot_args = [
+#     '-Gbgcolor=transparent',
+#     '-Gfontcolor=#2573a7',
+#     # '-Nshape=oval',
+#     # '-Nshape=circle',
+#     '-Grankdir=TB',
+#     # '-Gstyle=filled',
+#     # '-Gfillcolor=yellow;0.3:blue'
+#     # '-Gperipheries=1',
+#     # '-Ncolor=#4399FF'
+#     # '-Nstyle=filled',
+#     # '-Nfillcolor=red'
+#     '-Ncolor=#2573a7',
+#     # '-Nstyle="filled"',
+#     # '-Ncolor="blue"',
+#     # '-Nstyle="filled" -Nfillcolor="#ddddff"',
+#     # '-Nstyle=filled',
+#     # '-Nbgcolor=#2980b9',
+#     # '-Nfillcolor=red',
+#     # '-Nstyle=filled',
+#     '-Ecolor=#2573a7',
+#     # '-Ecolor=#4399FF',
+#     # '-Gbgcolor=# fcfcfc'
+# # '-Lg'
+# # '-Nshape=box'
+# # '-Ncolor=black'
+# # '-Gbgcolor=transparent', '-Nshape=sphere', '-Nfontname=courier'
+# # '-Gfontname=Simsun', '-Efontname=Simsun', '-Nfontname=Simsun'
+# # '-s32',
+# # '-Gratio=compress'
+# # '-Gsize=8.0,12.0',
+# # '-Ncolor=#465158'
+# ]
+# inheritance_graph_attrs = dict(rankdir="LR", size='"6.0, 8.0"',fontsize=14, ratio='compress')
+inheritance_graph_attrs = dict(rankdir="TB", bgcolor='transparent')
+
+# inheritance_node_attrs = dict(shape='Mrecord', fontsize=14, height=0.75, color='dodgerblue1', style='filled')
+inheritance_node_attrs = dict(shape='Mrecord', color='"#2573a7"', style='filled', fillcolor='"#eaf4fa"')
+
+inheritance_edge_attrs = dict(color='"#123a54"')
+
 autodoc_member_order = 'groupwise'
 autodoc_default_flags = ['members', 'show-inheritance']
 # The suffix(es) of source filenames.
@@ -217,5 +225,5 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 # intersphinx_mapping = {'https://docs.python.org/': None}
-# intersphinx_mapping = {'python': ('https://docs.python.org/3.6', None),
-#                        'naming': ('http://naming.readthedocs.io/en/latest/', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3.6', None),
+                       'naming': ('http://naming.readthedocs.io/en/latest/', None)}
