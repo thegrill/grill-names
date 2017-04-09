@@ -1,2 +1,4 @@
 [run]
-source = grill.names
+omit =
+    # omit anything in a .local directory anywhere
+    *site-packages*
