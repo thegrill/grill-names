@@ -70,3 +70,7 @@ class TestNames(unittest.TestCase):
         self.assertEqual('schrrig', name.workarea)
         self.assertEqual(' ', name.separator)
         self.assertEqual('tstabc schrrig hero concept original master default.0.ext', name.get_name())
+
+    def test_film_default(self):
+        name = Film.get_default()
+        self.assertEqual(name.name, 'envcode_kgrparea_prim_stage_original_master_default.0.ext')

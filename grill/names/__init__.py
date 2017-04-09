@@ -1,9 +1,9 @@
-# TODO: populate classes with JSON grill API call
+# todo: populate classes with JSON grill API call
 from naming import Name, Pipe, File, PipeFile
 
 
 class Project(PipeFile):
-    config = dict(project='[a-zA-Z0-9]+', workarea='[a-zA-Z0-9]+')
+    config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
     drops = 'base',
 
     def get_path_pattern_list(self):
@@ -43,3 +43,12 @@ class Film(Audiovisual):
     @property
     def branch(self):
         return 'pro'
+
+    @classmethod
+    def get_default(cls):
+        # todo: get defaults from environment variables?
+        defaults = dict(project='envcode', workarea='kgrparea', prim='prim', stage='stage', variant='original',
+                        partition='master', layer='default', version=0, extension='ext')
+        name = cls()
+        name.set_name(name.get_name(**defaults))
+        return name
