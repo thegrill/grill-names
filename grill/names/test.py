@@ -5,7 +5,6 @@ Names testing module.
 # standard
 import unittest
 from pathlib import Path
-
 # package
 from . import *
 
