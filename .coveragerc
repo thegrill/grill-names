@@ -1,4 +1,2 @@
-[run]
-omit =
-    # omit anything in a .local directory anywhere
-    *site-packages*
+[report]
+omit = *site-packages*
