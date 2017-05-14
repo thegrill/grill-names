@@ -1,0 +1,9 @@
+<map id="inheritance1d9eed5aa1" name="inheritance1d9eed5aa1">
+<area shape="rect" id="node1" href="#grill.names.Audiovisual" target="_top" title="Inherited by: :class:`grill.names.Film`" alt="" coords="30,379,185,405"/>
+<area shape="rect" id="node2" href="Environment.html#grill.names.Environment" target="_top" title="Inherited by: :class:`grill.names.Audiovisual`" alt="" coords="27,304,187,331"/>
+<area shape="rect" id="node3" href="Project.html#grill.names.Project" target="_top" title="Inherited by: :class:`grill.names.Environment`" alt="" coords="42,229,173,256"/>
+<area shape="rect" id="node4" title="Basic use::" alt="" coords="50,155,165,181"/>
+<area shape="rect" id="node5" title="Inherited by: :class:`naming.PipeFile`" alt="" coords="5,80,95,107"/>
+<area shape="rect" id="node6" title="Inherited by: :class:`naming.File` :class:`naming.Pipe`" alt="" coords="56,5,159,32"/>
+<area shape="rect" id="node7" title="Inherited by: :class:`naming.PipeFile`" alt="" coords="119,80,213,107"/>
+</map>

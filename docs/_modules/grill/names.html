@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>grill.names &mdash; grill.names 0.0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="grill.names 0.0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> grill.names
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Class List.html">Class List</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">grill.names</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>grill.names</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for grill.names</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">naming</span> <span class="k">import</span> <span class="n">PipeFile</span>
+
+
+<div class="viewcode-block" id="Project"><a class="viewcode-back" href="../../Project.html#grill.names.Project">[docs]</a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PipeFile</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Inherited by: :class:`grill.names.Environment`</span>
+
+<span class="sd">    Project Name objects.</span>
+
+<span class="sd">    ==========  ==========</span>
+<span class="sd">    **Config:**</span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    *project*   Accepts any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    *workarea*  Accepts any amount of word characters</span>
+<span class="sd">    ==========  ==========</span>
+
+<span class="sd">    =========== ==</span>
+<span class="sd">    **Drops:**</span>
+<span class="sd">    --------------</span>
+<span class="sd">    *base*</span>
+<span class="sd">    ==============</span>
+
+<span class="sd">    Basic use::</span>
+
+<span class="sd">        &gt;&gt;&gt; from grill.names import Project</span>
+<span class="sd">        &gt;&gt;&gt; p = Project()</span>
+<span class="sd">        &gt;&gt;&gt; p.get_name()</span>
+<span class="sd">        &#39;[project]_[workarea].[pipe].[extension]&#39;</span>
+<span class="sd">        &gt;&gt;&gt; f.get_name(extension=&#39;png&#39;)</span>
+<span class="sd">        &#39;[project]_[workarea].[pipe].png&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p.set_name(&#39;test_concept_art.1.psd&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; p.values</span>
+<span class="sd">        {&#39;project&#39;: &#39;test&#39;, &#39;workarea&#39;: &#39;concept_art&#39;, &#39;version&#39;: &#39;1&#39;, &#39;extension&#39;: &#39;psd&#39;}</span>
+<span class="sd">        &gt;&gt;&gt; p.workarea</span>
+<span class="sd">        &#39;concept_art&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p.workarea = &#39;rigging&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p.name</span>
+<span class="sd">        &#39;test_rigging.1.psd&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p.path</span>
+<span class="sd">        WindowsPath(&#39;test/rigging/test_rigging.1.psd&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;[a-zA-Z0-9]+&#39;</span><span class="p">,</span> <span class="n">workarea</span><span class="o">=</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+    <span class="n">drops</span> <span class="o">=</span> <span class="s1">&#39;base&#39;</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">get_path_pattern_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="s1">&#39;workarea&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Environment"><a class="viewcode-back" href="../../Environment.html#grill.names.Environment">[docs]</a><span class="k">class</span> <span class="nc">Environment</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Inherited by: :class:`grill.names.Audiovisual`</span>
+
+<span class="sd">    Environment splits the project field to know more about where it belongs.</span>
+
+<span class="sd">    ============= ==========</span>
+<span class="sd">    **Config:**</span>
+<span class="sd">    ------------------------</span>
+<span class="sd">    *environment* Composed of 3 lowercase letters</span>
+<span class="sd">    *code*        Accepts any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    ============= ==========</span>
+
+<span class="sd">    ========= ====</span>
+<span class="sd">    **Compounds:**</span>
+<span class="sd">    --------------</span>
+<span class="sd">    *project* environment, code</span>
+<span class="sd">    ========= ====</span>
+
+<span class="sd">    Basic use::</span>
+
+<span class="sd">        &gt;&gt;&gt; from grill.names import Environment</span>
+<span class="sd">        &gt;&gt;&gt; e = Environment(&#39;flmtest_concept_art.1.psd&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; e.values</span>
+<span class="sd">        {&#39;project&#39;: &#39;flmtest&#39;,</span>
+<span class="sd">        &#39;environment&#39;: &#39;flm&#39;,</span>
+<span class="sd">        &#39;code&#39;: &#39;test&#39;,</span>
+<span class="sd">        &#39;workarea&#39;: &#39;concept_art&#39;,</span>
+<span class="sd">        &#39;version&#39;: &#39;1&#39;,</span>
+<span class="sd">        &#39;extension&#39;: &#39;psd&#39;}</span>
+<span class="sd">        &gt;&gt;&gt; e.get_name(code=&#39;melon&#39;, output=&#39;blueprints&#39;)</span>
+<span class="sd">        &#39;flmmelon_concept_art.blueprints.1.psd&#39;</span>
+<span class="sd">        &gt;&gt;&gt; e.path</span>
+<span class="sd">        WindowsPath(&#39;test/flm/concept_art/flmtest_concept_art.1.psd&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">environment</span><span class="o">=</span><span class="s1">&#39;[a-z]</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="s1">&#39;[a-z0-9]+&#39;</span><span class="p">)</span>
+    <span class="n">compounds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;environment&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_path_pattern_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="s1">&#39;environment&#39;</span><span class="p">,</span> <span class="s1">&#39;workarea&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Audiovisual"><a class="viewcode-back" href="../../Audiovisual.html#grill.names.Audiovisual">[docs]</a><span class="k">class</span> <span class="nc">Audiovisual</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Inherited by: :class:`grill.names.Film`</span>
+
+<span class="sd">    Audiovisual names add the prim and stage fields to the Environment Names.</span>
+
+<span class="sd">    ======= ================</span>
+<span class="sd">    **Config:**</span>
+<span class="sd">    ------------------------</span>
+<span class="sd">    *prim*  Accepts any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    *stage* Accepts any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    ======= ================</span>
+
+<span class="sd">    Basic use::</span>
+
+<span class="sd">        &gt;&gt;&gt; from grill.names import Audiovisual</span>
+<span class="sd">        &gt;&gt;&gt; a = Audiovisual(&#39;flmtest_concept_art_hero_color.1.psd&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; a.values</span>
+<span class="sd">        {&#39;project&#39;: &#39;flmtest&#39;,</span>
+<span class="sd">        &#39;environment&#39;: &#39;flm&#39;,</span>
+<span class="sd">        &#39;code&#39;: &#39;test&#39;,</span>
+<span class="sd">        &#39;workarea&#39;: &#39;concept_art&#39;,</span>
+<span class="sd">        &#39;prim&#39;: &#39;hero&#39;,</span>
+<span class="sd">        &#39;stage&#39;: &#39;color&#39;,</span>
+<span class="sd">        &#39;version&#39;: &#39;1&#39;,</span>
+<span class="sd">        &#39;extension&#39;: &#39;psd&#39;}</span>
+<span class="sd">        &gt;&gt;&gt; a.prim = &#39;dragon&#39;</span>
+<span class="sd">        &gt;&gt;&gt; e.path</span>
+<span class="sd">        WindowsPath(&#39;test/flm/concept_art/flmtest_concept_art_dragon_color.1.psd&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">prim</span><span class="o">=</span><span class="s1">&#39;[a-zA-Z0-9]+&#39;</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="s1">&#39;[a-z0-9]+&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Film"><a class="viewcode-back" href="../../Film.html#grill.names.Film">[docs]</a><span class="k">class</span> <span class="nc">Film</span><span class="p">(</span><span class="n">Audiovisual</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Film name object for the Grill pipeline.</span>
+
+<span class="sd">    =========== ============</span>
+<span class="sd">    **Config:**</span>
+<span class="sd">    ------------------------</span>
+<span class="sd">    *kind*      Accepts any lowercase letter</span>
+<span class="sd">    *group*     Accepts 3 characters in the class [a-z0-9]</span>
+<span class="sd">    *area*      Any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    *variant*   Any amount of word characters</span>
+<span class="sd">    *partition* Any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    *layer*     Any amount of characters in the class [a-zA-Z0-9]</span>
+<span class="sd">    =========== ============</span>
+
+<span class="sd">    Basic use::</span>
+
+<span class="sd">        &gt;&gt;&gt; from grill.names import Film</span>
+<span class="sd">        &gt;&gt;&gt; f = Film()</span>
+<span class="sd">        &gt;&gt;&gt; f.get_name()</span>
+<span class="sd">        &#39;[project]_[workarea]_[prim]_[stage]_[variant]_[partition]_[layer].[pipe].[extension]&#39;</span>
+<span class="sd">        &gt;&gt;&gt; f = Film.get_default()</span>
+<span class="sd">        &gt;&gt;&gt; f.name</span>
+<span class="sd">        &#39;envcode_kgrparea_prim_stage_original_master_default.0.ext&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;[a-z]&#39;</span><span class="p">,</span>
+                  <span class="n">group</span><span class="o">=</span><span class="s1">&#39;[a-z0-9]</span><span class="si">{3}</span><span class="s1">&#39;</span><span class="p">,</span>
+                  <span class="n">area</span><span class="o">=</span><span class="s1">&#39;[a-z0-9]+&#39;</span><span class="p">,</span>
+                  <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span>
+                  <span class="n">partition</span><span class="o">=</span><span class="s1">&#39;[a-zA-Z0-9]+&#39;</span><span class="p">,</span>
+                  <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;[a-zA-Z0-9]+&#39;</span><span class="p">)</span>
+    <span class="n">compounds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">workarea</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Film</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_branch</span> <span class="o">=</span> <span class="s1">&#39;pro&#39;</span>
+
+    <span class="k">def</span> <span class="nf">get_path_pattern_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_path_pattern_list</span><span class="p">()</span>
+        <span class="n">wa_i</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;workarea&#39;</span><span class="p">)</span>
+        <span class="n">new_p</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">[:</span><span class="n">wa_i</span><span class="p">]</span>
+        <span class="n">new_p</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;branch&#39;</span><span class="p">,</span> <span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;prim&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="s1">&#39;stage&#39;</span><span class="p">])</span>
+        <span class="n">new_p</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pattern</span><span class="p">[</span><span class="n">wa_i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+        <span class="n">new_p</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;variant&#39;</span><span class="p">,</span> <span class="s1">&#39;partition&#39;</span><span class="p">,</span> <span class="s1">&#39;layer&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">new_p</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">branch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The branch in the production of the project (pro, dev, test, etc)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_branch</span>
+
+    <span class="nd">@branch</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_branch</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Film.get_default"><a class="viewcode-back" href="../../Film.html#grill.names.Film.get_default">[docs]</a>    <span class="k">def</span> <span class="nf">get_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a new instance with the defaults of this Name values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;envcode&#39;</span><span class="p">,</span> <span class="n">workarea</span><span class="o">=</span><span class="s1">&#39;kgrparea&#39;</span><span class="p">,</span> <span class="n">prim</span><span class="o">=</span><span class="s1">&#39;prim&#39;</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="s1">&#39;stage&#39;</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">,</span>
+                        <span class="n">partition</span><span class="o">=</span><span class="s1">&#39;master&#39;</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;ext&#39;</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="n">name</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">get_name</span><span class="p">(</span><span class="o">**</span><span class="n">defaults</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">name</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, The Grill.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
