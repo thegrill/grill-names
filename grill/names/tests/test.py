@@ -6,7 +6,7 @@ Names testing module.
 import unittest
 from pathlib import Path
 # package
-from . import *
+from grill.names import *
 
 
 def _get_project_kwargs():

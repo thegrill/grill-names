@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name='grill-names',
     version='0.0.1',
-    packages=find_packages(),
+    packages=find_packages(exclude=("*.tests", "*.tests.*", "tests.*", "tests", "*.docs", "*.docs.*", "docs.*", "docs")),
     description='Name objects for digital content creation.',
     author='Christian Lopez Barron',
     author_email='chris.gfz@gmail.com',

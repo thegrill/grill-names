@@ -1,5 +1,4 @@
-# todo: populate classes with JSON grill API call
-from naming import Name, Pipe, File, PipeFile
+from naming import PipeFile
 
 
 class Project(PipeFile):
@@ -172,7 +171,6 @@ class Film(Audiovisual):
         """
         Get a new instance with the defaults of this Name values.
         """
-        # todo: get defaults from environment variables?
         defaults = dict(project='envcode', workarea='kgrparea', prim='prim', stage='stage', variant='original',
                         partition='master', layer='default', version=0, extension='ext')
         name = cls()
