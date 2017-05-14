@@ -1,4 +1,4 @@
-from naming import PipeFile
+from naming import Name, File, Pipe, PipeFile  # bring standard names to this module level
 
 
 class Project(PipeFile):
