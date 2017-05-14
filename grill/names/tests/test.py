@@ -57,7 +57,7 @@ class TestNames(unittest.TestCase):
         name.set_name(name.get_name(area='model'))
         self.assertEqual(name.workarea, 'schrmodel')
         path = Path.joinpath(Path(), 'abc', 'tst', 'pro', 's', 'chr', 'hero', 'model', 'concept', 'original', 'master',
-                            'default', '0', 'tstabc_schrmodel_hero_concept_original_master_default.0.ext')
+                             'default', '0', 'tstabc_schrmodel_hero_concept_original_master_default.0.ext')
         self.assertEqual(Path(path), name.path)
         name.separator = '-'
         self.assertEqual('-', name.separator)
@@ -70,6 +70,11 @@ class TestNames(unittest.TestCase):
         self.assertEqual('schrrig', name.workarea)
         self.assertEqual(' ', name.separator)
         self.assertEqual('tstabc schrrig hero concept original master default.0.ext', name.get_name())
+        name.separator = '_'
+        name.branch = 'dev'
+        path = Path.joinpath(Path(), 'abc', 'tst', 'dev', 's', 'chr', 'hero', 'rig', 'concept', 'original', 'master',
+                             'default', '0', 'tstabc_schrrig_hero_concept_original_master_default.0.ext')
+        self.assertEqual(Path(path), name.path)
 
     def test_film_default(self):
         name = Film.get_default()

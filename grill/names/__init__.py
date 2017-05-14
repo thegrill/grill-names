@@ -150,6 +150,10 @@ class Film(Audiovisual):
                   layer='[a-zA-Z0-9]+')
     compounds = dict(workarea=('kind', 'group', 'area'))
 
+    def __init__(self, *args, **kwargs):
+        super(Film, self).__init__(*args, **kwargs)
+        self._branch = 'pro'
+
     def get_path_pattern_list(self):
         pattern = super().get_path_pattern_list()
         wa_i = pattern.index('workarea')
@@ -164,7 +168,11 @@ class Film(Audiovisual):
         """
         The branch in the production of the project (pro, dev, test, etc)
         """
-        return 'pro'
+        return self._branch
+
+    @branch.setter
+    def branch(self, value):
+        self._branch = value
 
     @classmethod
     def get_default(cls):
