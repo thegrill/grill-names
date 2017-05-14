@@ -1,0 +1,15 @@
+.toggle .header {
+    cursor:pointer;
+    display: block;
+    clear: both;
+}
+
+.toggle .header:before {
+    content: "➤ ";
+    /*content: "▼ ";*/
+}
+
+.toggle .header.open:before {
+    /*content: "▲ ";*/
+    content: "▼ ";
+}

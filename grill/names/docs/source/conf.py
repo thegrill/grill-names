@@ -95,7 +95,8 @@ templates_path = ['_templates']
 inheritance_graph_attrs = dict(rankdir="TB", bgcolor='transparent')
 
 # inheritance_node_attrs = dict(shape='Mrecord', fontsize=14, height=0.75, color='dodgerblue1', style='filled')
-inheritance_node_attrs = dict(shape='Mrecord', color='"#2573a7"', style='filled', fillcolor='"#eaf4fa"')
+inheritance_node_attrs = dict(shape='Mrecord', color='"#2573a7"', style='filled', fillcolor='"#eaf4fa"',
+                              size='"6.0, 8.0"')
 
 inheritance_edge_attrs = dict(color='"#123a54"')
 
