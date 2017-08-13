@@ -24,6 +24,7 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
   - pip install sphinx sphinx_rtd_theme sphinx_autodoc_typehints  # Install documentation dependencies
+#  - pip install python-coveralls
   - python setup.py install
 
 #install:
@@ -34,5 +35,5 @@ install:
 
 script:
 #  - python setup.py test -vv  # Test against installed code
-  - python -m unittest discover grill.names -v
+  - python -m unittest discover $TRAVIS_BUILD_DIR -v
 #  - sphinx-build -vW -b html docs/source _HTMLTest #Test docs build
