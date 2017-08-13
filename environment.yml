@@ -6,6 +6,6 @@ dependencies:
   - python=3.6
   - pip:
     - naming
-    - -e git+https://github.com/thegrill/sphinx.git@grill-intersphinx-uniqueref
+    - "--editable=git+https://github.com/sphinx-doc/sphinx.git"
     - sphinx_autodoc_typehints
     - sphinx_rtd_theme
