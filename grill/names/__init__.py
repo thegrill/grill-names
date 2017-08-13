@@ -46,7 +46,7 @@ class Project(PipeFile):
 
 
 class Environment(Project):
-    """Inherited by: :class:`grill.names.Audiovisual`
+    """Inherited by: :class:`grill.names.Primitive`
 
     Environment splits the project field to know more about where it belongs.
 
