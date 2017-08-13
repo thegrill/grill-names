@@ -1,7 +1,6 @@
 .idea/
-grill/names/__pycache__/
-grill/names/docs/build/
-grill/names/docs/Makefile
-grill/names/docs/make.bat
+*__pycache__*
+docs/build/
 dist/
 grill_names.egg-info/
+*.pyc

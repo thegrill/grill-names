@@ -4,7 +4,7 @@ Class List
 .. toctree::
     :maxdepth: 4
 
-    Audiovisual
+    Asset
     Environment
-    Film
+    Primitive
     Project
