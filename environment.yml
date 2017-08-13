@@ -4,4 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.6
-  - naming
+  - pip:
+    - naming
+    - sphinx_autodoc_typehints
+    - sphinx_rtd_theme
