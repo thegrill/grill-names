@@ -31,5 +31,5 @@ install:
 
 script:
 #  - python setup.py test -vv  # Test against installed code
-  - python -m unittest discover grill.names -v
+  - python -m unittest discover grill.names.tests -v
 #  - sphinx-build -vW -b html docs/source _HTMLTest #Test docs build
