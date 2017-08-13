@@ -6,6 +6,6 @@ dependencies:
   - python=3.6
   - pip:
     - naming
-    - "--editable=git+https://github.com/sphinx-doc/sphinx.git@stable"
+    - "--editable=git+https://github.com/sphinx-doc/sphinx.git@stable#egg=Sphinx1"
     - sphinx_autodoc_typehints
     - sphinx_rtd_theme
