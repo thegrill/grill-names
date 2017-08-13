@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Names testing module.
-"""
 # standard
 import unittest
 from pathlib import Path
@@ -12,19 +8,19 @@ from grill.names import *
 def _get_project_kwargs():
     project = 'tstabc'
     workarea = 'current'
-    version = '0'
+    version = 0
     extension = 'ext'
     return locals()
 
 
-def _get_audiovisual_kwargs():
+def _get_primitive_kwargs():
     values = _get_project_kwargs()
     values.update(prim='hero', stage='concept')
     return values
 
 
-def _get_film_kwargs():
-    values = _get_audiovisual_kwargs()
+def _get_asset_kwargs():
+    values = _get_primitive_kwargs()
     values.update(workarea='schrgeo', variant='original', partition='master', layer='default')
     return values
 
@@ -47,13 +43,13 @@ class TestNames(unittest.TestCase):
         self.assertEqual(Path('abc/gme/current/gmeabc_current.0.ext'), name.path)
 
     def test_audiovisual(self):
-        name = Audiovisual()
-        name.set_name(name.get_name(**_get_audiovisual_kwargs()))
+        name = Primitive()
+        name.set_name(name.get_name(**_get_primitive_kwargs()))
         self.assertEqual(Path('abc/tst/current/tstabc_current_hero_concept.0.ext'), name.path)
 
     def test_film(self):
-        name = Film()
-        name.set_name(name.get_name(**_get_film_kwargs()))
+        name = Asset()
+        name.set_name(name.get_name(**_get_asset_kwargs()))
         name.set_name(name.get_name(area='model'))
         self.assertEqual(name.workarea, 'schrmodel')
         path = Path.joinpath(Path(), 'abc', 'tst', 'pro', 's', 'chr', 'hero', 'model', 'concept', 'original', 'master',
@@ -77,5 +73,5 @@ class TestNames(unittest.TestCase):
         self.assertEqual(Path(path), name.path)
 
     def test_film_default(self):
-        name = Film.get_default()
+        name = Asset.get_default()
         self.assertEqual(name.name, 'envcode_kgrparea_prim_stage_original_master_default.0.ext')

@@ -1,0 +1,10 @@
+name: grill-names
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6
+  - pip:
+    - naming
+    - sphinx_autodoc_typehints
+    - sphinx_rtd_theme

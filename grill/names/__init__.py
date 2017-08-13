@@ -9,8 +9,8 @@ class Project(PipeFile):
     ==========  ==========
     **Config:**
     ----------------------
-    *project*   Accepts any amount of characters in the class [a-zA-Z0-9]
-    *workarea*  Accepts any amount of word characters
+    *project*   Any amount of characters in the class [a-zA-Z0-9]
+    *workarea*  Any amount of word characters
     ==========  ==========
 
     =========== ==
@@ -46,7 +46,7 @@ class Project(PipeFile):
 
 
 class Environment(Project):
-    """Inherited by: :class:`grill.names.Audiovisual`
+    """Inherited by: :class:`grill.names.Primitive`
 
     Environment splits the project field to know more about where it belongs.
 
@@ -54,7 +54,7 @@ class Environment(Project):
     **Config:**
     ------------------------
     *environment* Composed of 3 lowercase letters
-    *code*        Accepts any amount of characters in the class [a-zA-Z0-9]
+    *code*        Any amount of characters in the class [a-zA-Z0-9]
     ============= ==========
 
     ========= ====
@@ -86,25 +86,25 @@ class Environment(Project):
         return ['code', 'environment', 'workarea']
 
 
-class Audiovisual(Environment):
-    """Inherited by: :class:`grill.names.Film`
+class Primitive(Environment):
+    """Inherited by: :class:`grill.names.Asset`
 
-    Audiovisual names add the prim and stage fields to the Environment Names.
+    For primitive names with multiple stages of development.
 
     ======= ================
     **Config:**
     ------------------------
-    *prim*  Accepts any amount of characters in the class [a-zA-Z0-9]
-    *stage* Accepts any amount of characters in the class [a-zA-Z0-9]
+    *prim*  Any amount of characters in the class [a-zA-Z0-9]
+    *stage* Any amount of characters in the class [a-zA-Z0-9]
     ======= ================
 
     Basic use::
 
-        >>> from grill.names import Audiovisual
-        >>> a = Audiovisual('flmtest_concept_art_hero_color.1.psd')
+        >>> from grill.names import Primitive
+        >>> a = Primitive('prmtest_concept_art_hero_color.1.psd')
         >>> a.values
-        {'project': 'flmtest',
-        'environment': 'flm',
+        {'project': 'prmtest',
+        'environment': 'prm',
         'code': 'test',
         'workarea': 'concept_art',
         'prim': 'hero',
@@ -113,18 +113,20 @@ class Audiovisual(Environment):
         'extension': 'psd'}
         >>> a.prim = 'dragon'
         >>> e.path
-        WindowsPath('test/flm/concept_art/flmtest_concept_art_dragon_color.1.psd')
+        WindowsPath('test/prm/concept_art/prmtest_concept_art_dragon_color.1.psd')
     """
     config = dict(prim='[a-zA-Z0-9]+', stage='[a-z0-9]+')
 
 
-class Film(Audiovisual):
-    """Film name object for the Grill pipeline.
+class Asset(Primitive):
+    """
+    Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
+    through their life cycles (e.g. a character, a film, a videogame).
 
     =========== ============
     **Config:**
     ------------------------
-    *kind*      Accepts any lowercase letter
+    *kind*      Any lowercase letter
     *group*     Accepts 3 characters in the class [a-z0-9]
     *area*      Any amount of characters in the class [a-zA-Z0-9]
     *variant*   Any amount of word characters
@@ -134,12 +136,12 @@ class Film(Audiovisual):
 
     Basic use::
 
-        >>> from grill.names import Film
-        >>> f = Film()
-        >>> f.get_name()
+        >>> from grill.names import Asset
+        >>> a = Asset()
+        >>> a.get_name()
         '[project]_[workarea]_[prim]_[stage]_[variant]_[partition]_[layer].[pipe].[extension]'
-        >>> f = Film.get_default()
-        >>> f.name
+        >>> a = Asset.get_default()
+        >>> a.name
         'envcode_kgrparea_prim_stage_original_master_default.0.ext'
     """
     config = dict(kind='[a-z]',
@@ -151,7 +153,7 @@ class Film(Audiovisual):
     compounds = dict(workarea=('kind', 'group', 'area'))
 
     def __init__(self, *args, **kwargs):
-        super(Film, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._branch = 'pro'
 
     def get_path_pattern_list(self):
@@ -175,10 +177,8 @@ class Film(Audiovisual):
         self._branch = value
 
     @classmethod
-    def get_default(cls):
-        """
-        Get a new instance with the defaults of this Name values.
-        """
+    def get_default(cls) -> 'Asset':
+        """Get a new instance with the defaults of this Name values."""
         defaults = dict(project='envcode', workarea='kgrparea', prim='prim', stage='stage', variant='original',
                         partition='master', layer='default', version=0, extension='ext')
         name = cls()
