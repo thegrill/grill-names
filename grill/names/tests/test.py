@@ -8,8 +8,6 @@ from grill.names import *
 def _get_project_kwargs():
     project = 'tstabc'
     workarea = 'current'
-    version = 0
-    extension = 'ext'
     return locals()
 
 
@@ -25,13 +23,18 @@ def _get_asset_kwargs():
     return values
 
 
+def _get_assetfile_kwargs():
+    values = _get_asset_kwargs()
+    values.update(version=0, extension='ext')
+    return values
+
+
 class TestNames(unittest.TestCase):
 
     def test_project(self):
         name = Project()
         name.set_name(name.get_name(**_get_project_kwargs()))
         self.assertEqual('tstabc_current', name.nice_name)
-        self.assertEqual(Path('tstabc/current/tstabc_current.0.ext'), name.path)
 
     def test_environment(self):
         name = Environment()
@@ -40,16 +43,15 @@ class TestNames(unittest.TestCase):
         name.environment = 'gme'
         self.assertEqual('gme', name.environment)
         self.assertEqual('abc', name.code)
-        self.assertEqual(Path('abc/gme/current/gmeabc_current.0.ext'), name.path)
 
     def test_audiovisual(self):
         name = Primitive()
         name.set_name(name.get_name(**_get_primitive_kwargs()))
-        self.assertEqual(Path('abc/tst/current/tstabc_current_hero_concept.0.ext'), name.path)
+        self.assertEqual('tstabc_current_hero_concept', name.name)
 
-    def test_film(self):
-        name = Asset()
-        name.set_name(name.get_name(**_get_asset_kwargs()))
+    def test_asset(self):
+        name = AssetFile()
+        name.set_name(name.get_name(**_get_assetfile_kwargs()))
         name.set_name(name.get_name(area='model'))
         self.assertEqual(name.workarea, 'schrmodel')
         path = Path.joinpath(Path(), 'abc', 'tst', 'pro', 's', 'chr', 'hero', 'model', 'concept', 'original', 'master',
@@ -72,6 +74,8 @@ class TestNames(unittest.TestCase):
                              'default', '0', 'tstabc_schrrig_hero_concept_original_master_default.0.ext')
         self.assertEqual(Path(path), name.path)
 
-    def test_film_default(self):
-        name = Asset.get_default()
+    def test_asset_default(self):
+        name = Asset.get_default(prim='hero')
+        self.assertEqual(name.name, 'envcode_kgrparea_hero_stage_original_master_default')
+        name = AssetFile.get_default()
         self.assertEqual(name.name, 'envcode_kgrparea_prim_stage_original_master_default.0.ext')
