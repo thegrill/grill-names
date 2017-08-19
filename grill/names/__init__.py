@@ -37,9 +37,6 @@ class Project(Name):
     config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
     drops = 'base',
 
-    def get_path_pattern_list(self):
-        return ['project', 'workarea']
-
 
 class Environment(Project):
     """Inherited by: :class:`grill.names.Primitive`
