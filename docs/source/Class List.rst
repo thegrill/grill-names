@@ -5,6 +5,7 @@ Class List
     :maxdepth: 4
 
     Asset
+    AssetFile
     Environment
     Primitive
     Project
