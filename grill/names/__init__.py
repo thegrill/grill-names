@@ -121,6 +121,12 @@ class Asset(Primitive):
     *layer*     Any amount of characters in the class [a-zA-Z0-9]
     =========== ============
 
+    ========== ====
+    **Compounds:**
+    ---------------
+    *workarea* kind, group, area
+    ========== ====
+
     Basic use::
 
         >>> from grill.names import Asset
