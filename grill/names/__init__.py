@@ -39,7 +39,7 @@ class Project(Name):
     config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
     drops = 'base',
 
-    def __init__(self, *args, sep='-', **kwargs):
+    def __init__(self, *args, sep='_', **kwargs):
         super().__init__(*args, sep=sep, **kwargs)
 
 
@@ -217,7 +217,7 @@ class CGAsset(Name):
         super().__init__(*args, sep=sep, **kwargs)
 
     @property
-    def defaults(self):
+    def _defaults(self):
         return {k: v['default'] for k, v in cgasset.IDS.items()}
 
     @classmethod
@@ -228,7 +228,7 @@ class CGAsset(Name):
 
 def _from_cls_defaults(cls, **kwargs):
     name = cls()
-    defaults = name.defaults
+    defaults = name._defaults
     defaults.update(kwargs)
     name.name = name.get_name(**defaults)
     return name
