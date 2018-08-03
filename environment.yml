@@ -3,7 +3,7 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - python=3.6
+  - python=3.7
   - pip:
     - naming
     - "git+https://github.com/thegrill/sphinx.git@grill-intersphinx-uniqueref#egg=Sphinx"

@@ -1,4 +1,6 @@
+from __future__ import annotations
 from naming import Name, File, Pipe, PipeFile  # bring standard names to this module level
+from grill.ids import cgasset
 
 
 class Project(Name):
@@ -37,9 +39,9 @@ class Project(Name):
     config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
     drops = 'base',
 
-    def __init__(self, *args, **kwargs):
-        kwargs.update(sep=kwargs.get('sep', '_'))
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, sep='-', **kwargs):
+        super().__init__(*args, sep=sep, **kwargs)
+
 
 class Environment(Project):
     """Inherited by: :class:`grill.names.Primitive`
@@ -173,11 +175,7 @@ class Asset(Primitive):
     @classmethod
     def get_default(cls, **kwargs) -> 'Asset':
         """Get a new Name object with default values and optional field names from **kwargs."""
-        name = cls()
-        defaults = name._defaults
-        defaults.update(kwargs)
-        name.name = name.get_name(**defaults)
-        return name
+        return _from_cls_defaults(cls, **kwargs)
 
     @property
     def _defaults(self):
@@ -209,3 +207,28 @@ class AssetFile(Asset, PipeFile):
         pattern = super().get_path_pattern_list()
         pattern.append('version')
         return pattern
+
+
+class CGAsset(Name):
+    config = dict.fromkeys(cgasset.IDS, '\w+')
+    drops = 'base',
+
+    def __init__(self, *args, sep='-', **kwargs):
+        super().__init__(*args, sep=sep, **kwargs)
+
+    @property
+    def defaults(self):
+        return {k: v['default'] for k, v in cgasset.IDS.items()}
+
+    @classmethod
+    def get_default(cls, **kwargs) -> CGAsset:
+        """Get a new Name object with default values and optional field names from **kwargs."""
+        return _from_cls_defaults(cls, **kwargs)
+
+
+def _from_cls_defaults(cls, **kwargs):
+    name = cls()
+    defaults = name.defaults
+    defaults.update(kwargs)
+    name.name = name.get_name(**defaults)
+    return name

@@ -79,3 +79,9 @@ class TestNames(unittest.TestCase):
         self.assertEqual(name.name, 'envcode_kgrparea_hero_stage_original_master_default')
         name = AssetFile.get_default()
         self.assertEqual(name.name, 'envcode_kgrparea_prim_stage_original_master_default.0.ext')
+
+    def test_cgasset(self):
+        self.assertEqual(CGAsset().get_name(),
+                         '{code}-{env}-{typ}-{kind}-{area}-{branch}-{item}-{proc}-{var}-{part}')
+        self.assertEqual(CGAsset.get_default().name,
+                         'demo-3d-abc-subcomponent-rnd-master-atom-main-all-world')
