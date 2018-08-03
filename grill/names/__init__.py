@@ -27,7 +27,7 @@ class Project(Name):
         '[project]_[workarea]'
         >>> f.get_name(workarea='foo')
         '[project]_foo'
-        >>> p.set_name('test_concept_art')
+        >>> p.name = 'test_concept_art'
         >>> p.values
         {'project': 'test', 'workarea': 'concept_art'}
         >>> p.workarea = 'rigging'
@@ -37,6 +37,9 @@ class Project(Name):
     config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
     drops = 'base',
 
+    def __init__(self, *args, **kwargs):
+        kwargs.update(sep=kwargs.get('sep', '_'))
+        super().__init__(*args, **kwargs)
 
 class Environment(Project):
     """Inherited by: :class:`grill.names.Primitive`
@@ -99,7 +102,7 @@ class Primitive(Environment):
         'prim': 'hero',
         'stage': 'color',
         'version': '1',
-        'extension': 'psd'}
+        'suffix': 'psd'}
     """
     config = dict(prim='[a-zA-Z0-9]+', stage='[a-z0-9]+')
 
@@ -173,7 +176,7 @@ class Asset(Primitive):
         name = cls()
         defaults = name._defaults
         defaults.update(kwargs)
-        name.set_name(name.get_name(**defaults))
+        name.name = name.get_name(**defaults)
         return name
 
     @property
@@ -189,9 +192,9 @@ class AssetFile(Asset, PipeFile):
 
         >>> from grill.names import AssetFile
         >>> a = Asset.get_default()
-        >>> a.extension
+        >>> a.suffix
         'ext'
-        >>> a.extension = 'abc'
+        >>> a.suffix = 'abc'
         >>> a.path
         WindowsPath('code/env/pro/k/grp/prim/area/stage/original/master/default/0/envcode_kgrparea_prim_stage_original_master_default.0.abc')
     """
@@ -199,7 +202,7 @@ class AssetFile(Asset, PipeFile):
     @property
     def _defaults(self):
         result = super()._defaults
-        result.update(version=0, extension='ext')
+        result.update(version=0, suffix='ext')
         return result
 
     def get_path_pattern_list(self):
