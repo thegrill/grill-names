@@ -1,5 +1,5 @@
-Asset
-=====
+CGAsset
+=======
 
 .. toctree::
     :maxdepth: 4
