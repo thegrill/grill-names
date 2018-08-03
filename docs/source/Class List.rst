@@ -6,6 +6,7 @@ Class List
 
     Asset
     AssetFile
+    CGAsset
     Environment
     Primitive
     Project
