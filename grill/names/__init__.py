@@ -1,4 +1,6 @@
+from __future__ import annotations
 from naming import Name, File, Pipe, PipeFile  # bring standard names to this module level
+from grill.ids import cgasset
 
 
 class Project(Name):
@@ -27,7 +29,7 @@ class Project(Name):
         '[project]_[workarea]'
         >>> f.get_name(workarea='foo')
         '[project]_foo'
-        >>> p.set_name('test_concept_art')
+        >>> p.name = 'test_concept_art'
         >>> p.values
         {'project': 'test', 'workarea': 'concept_art'}
         >>> p.workarea = 'rigging'
@@ -36,6 +38,9 @@ class Project(Name):
     """
     config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
     drops = 'base',
+
+    def __init__(self, *args, sep='_', **kwargs):
+        super().__init__(*args, sep=sep, **kwargs)
 
 
 class Environment(Project):
@@ -99,7 +104,7 @@ class Primitive(Environment):
         'prim': 'hero',
         'stage': 'color',
         'version': '1',
-        'extension': 'psd'}
+        'suffix': 'psd'}
     """
     config = dict(prim='[a-zA-Z0-9]+', stage='[a-z0-9]+')
 
@@ -168,13 +173,9 @@ class Asset(Primitive):
         self._branch = value
 
     @classmethod
-    def get_default(cls, **kwargs) -> 'Asset':
+    def get_default(cls, **kwargs) -> Asset:
         """Get a new Name object with default values and optional field names from **kwargs."""
-        name = cls()
-        defaults = name._defaults
-        defaults.update(kwargs)
-        name.set_name(name.get_name(**defaults))
-        return name
+        return _from_cls_defaults(cls, **kwargs)
 
     @property
     def _defaults(self):
@@ -189,9 +190,9 @@ class AssetFile(Asset, PipeFile):
 
         >>> from grill.names import AssetFile
         >>> a = Asset.get_default()
-        >>> a.extension
+        >>> a.suffix
         'ext'
-        >>> a.extension = 'abc'
+        >>> a.suffix = 'abc'
         >>> a.path
         WindowsPath('code/env/pro/k/grp/prim/area/stage/original/master/default/0/envcode_kgrparea_prim_stage_original_master_default.0.abc')
     """
@@ -199,10 +200,61 @@ class AssetFile(Asset, PipeFile):
     @property
     def _defaults(self):
         result = super()._defaults
-        result.update(version=0, extension='ext')
+        result.update(version=0, suffix='ext')
         return result
 
     def get_path_pattern_list(self):
         pattern = super().get_path_pattern_list()
         pattern.append('version')
         return pattern
+
+
+class CGAsset(Name):
+    """Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
+    through their life cycles (e.g. a character, a film, a videogame).
+
+    =========== ============
+    **Config:**
+    ------------------------
+    *code*      Any amount of word characters
+    *env*       Any amount of word characters
+    *typ*       Any amount of word characters
+    *kind*      Any amount of word characters
+    *area*      Any amount of word characters
+    *branch*    Any amount of word characters
+    *item*      Any amount of word characters
+    *proc*      Any amount of word characters
+    *var*       Any amount of word characters
+    *part*      Any amount of word characters
+    =========== ============
+
+    Basic use::
+
+        >>> from grill.names import CGAsset
+        >>> CGAsset().get_name()
+        '{code}-{env}-{typ}-{kind}-{area}-{branch}-{item}-{proc}-{var}-{part}'
+        >>> CGAsset.get_default(area='concept_art')
+        CGAsset("demo-3d-abc-subcomponent-concept_art-master-atom-main-all-world")
+    """
+    config = dict.fromkeys(cgasset.IDS, '\w+')
+    drops = 'base',
+
+    def __init__(self, *args, sep='-', **kwargs):
+        super().__init__(*args, sep=sep, **kwargs)
+
+    @property
+    def _defaults(self):
+        return {k: v['default'] for k, v in cgasset.IDS.items()}
+
+    @classmethod
+    def get_default(cls, **kwargs) -> CGAsset:
+        """Get a new Name object with default values and optional field names from **kwargs."""
+        return _from_cls_defaults(cls, **kwargs)
+
+
+def _from_cls_defaults(cls, **kwargs):
+    name = cls()
+    defaults = name._defaults
+    defaults.update(kwargs)
+    name.name = name.get_name(**defaults)
+    return name
