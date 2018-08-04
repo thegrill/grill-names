@@ -210,33 +210,31 @@ class AssetFile(Asset, PipeFile):
 
 
 class CGAsset(Name):
-    """Inherited by:
+    """Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
+    through their life cycles (e.g. a character, a film, a videogame).
 
-        Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
-        through their life cycles (e.g. a character, a film, a videogame).
+    =========== ============
+    **Config:**
+    ------------------------
+    *code*      Any amount of word characters
+    *env*       Any amount of word characters
+    *typ*       Any amount of word characters
+    *kind*      Any amount of word characters
+    *area*      Any amount of word characters
+    *branch*    Any amount of word characters
+    *item*      Any amount of word characters
+    *proc*      Any amount of word characters
+    *var*       Any amount of word characters
+    *part*      Any amount of word characters
+    =========== ============
 
-        =========== ============
-        **Config:**
-        ------------------------
-        *code*      Any amount of word characters
-        *env*       Any amount of word characters
-        *typ*       Any amount of word characters
-        *kind*      Any amount of word characters
-        *area*      Any amount of word characters
-        *branch*    Any amount of word characters
-        *item*      Any amount of word characters
-        *proc*      Any amount of word characters
-        *var*       Any amount of word characters
-        *part*      Any amount of word characters
-        =========== ============
+    Basic use::
 
-        Basic use::
-
-            >>> from grill.names import CGAsset
-            >>> CGAsset().get_name()
-            '{code}-{env}-{typ}-{kind}-{area}-{branch}-{item}-{proc}-{var}-{part}'
-            >>> CGAsset.get_default(area='concept_art')
-            CGAsset("demo-3d-abc-subcomponent-concept_art-master-atom-main-all-world")
+        >>> from grill.names import CGAsset
+        >>> CGAsset().get_name()
+        '{code}-{env}-{typ}-{kind}-{area}-{branch}-{item}-{proc}-{var}-{part}'
+        >>> CGAsset.get_default(area='concept_art')
+        CGAsset("demo-3d-abc-subcomponent-concept_art-master-atom-main-all-world")
     """
     config = dict.fromkeys(cgasset.IDS, '\w+')
     drops = 'base',
