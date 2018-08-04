@@ -173,7 +173,7 @@ class Asset(Primitive):
         self._branch = value
 
     @classmethod
-    def get_default(cls, **kwargs) -> 'Asset':
+    def get_default(cls, **kwargs) -> Asset:
         """Get a new Name object with default values and optional field names from **kwargs."""
         return _from_cls_defaults(cls, **kwargs)
 
