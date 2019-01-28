@@ -1,6 +1,7 @@
 from types import MappingProxyType
 from functools import lru_cache
 
+
 @lru_cache()
 def __getattr__(name):
     ids = MappingProxyType(dict(
@@ -14,20 +15,20 @@ def __getattr__(name):
             default="3d",
             help="Environment of a project, e.g. 'film', 'vr', 'ar'.",
         )),
-        typ = MappingProxyType(dict(
-            short_name="t",
+        cluster = MappingProxyType(dict(
+            short_name="cl",
             default="abc",
-            help="Type of the data existing in a contribution, e.g. 'geo', 'audio', 'video'.",
+            help="Cluster of data type existing in a contribution, e.g. 'geo', 'audio', 'video'.",
         )),
         kind = MappingProxyType(dict(
             short_name="k",
-            default="subcomponent",
+            default="component",
             help="Higher level classification of contributions, e.g. 'component', 'subcomponent', 'prop'.",
         )),
         area = MappingProxyType(dict(
             short_name="a",
             default="rnd",
-            help="Pipeline step in the creative process owning the contribution. Usually related to departments.",
+            help="Area in the creative process owning the contribution. Usually related to departments.",
         )),
         branch = MappingProxyType(dict(
             short_name="b",
@@ -39,23 +40,23 @@ def __getattr__(name):
             default="atom",
             help="Atomic unit of a contribution that makes sense on its own as a whole.",
         )),
-        proc = MappingProxyType(dict(
-            short_name="p",
+        step = MappingProxyType(dict(
+            short_name="s",
             default="main",
-            help="Inner process / task of the current `area` during the life cycle of a contribution.",
+            help="Inner process of the current `area` during the life cycle of a contribution.",
         )),
-        var = MappingProxyType(dict(
+        variant = MappingProxyType(dict(
             short_name="v",
             default="all",
             help="Variation expressing a different intent of the current `item`.",
         )),
         part = MappingProxyType(dict(
-            short_name="pt",
-            default="world",
+            short_name="p",
+            default="whole",
             help="Partition of the current `variation` / `item`.",
         )),
     ))
-    if name=='IDS':
+    if name == 'IDS':
         return ids
     elif name in ids:
         return ids[name]
