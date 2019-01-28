@@ -1,6 +1,7 @@
 import unittest
 from grill import ids
 
+
 class TestIDs(unittest.TestCase):
 
     def test_keys(self):
