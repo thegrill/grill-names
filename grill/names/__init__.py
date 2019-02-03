@@ -1,6 +1,6 @@
 from __future__ import annotations
 from naming import Name, File, Pipe, PipeFile  # bring standard names to this module level
-from grill.ids import cgasset
+from grill import ids
 
 
 class Project(Name):
@@ -236,7 +236,7 @@ class CGAsset(Name):
         >>> CGAsset.get_default(area='concept_art')
         CGAsset("demo-3d-abc-subcomponent-concept_art-master-atom-main-all-world")
     """
-    config = dict.fromkeys(cgasset.IDS, '\w+')
+    config = {k: v['pattern'] for k, v in ids.CGAsset.items()}
     drops = 'base',
 
     def __init__(self, *args, sep='-', **kwargs):
@@ -244,7 +244,7 @@ class CGAsset(Name):
 
     @property
     def _defaults(self):
-        return {k: v['default'] for k, v in cgasset.IDS.items()}
+        return {k: v['default'] for k, v in ids.CGAsset.items()}
 
     @classmethod
     def get_default(cls, **kwargs) -> CGAsset:
