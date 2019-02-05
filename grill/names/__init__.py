@@ -1,6 +1,6 @@
 from __future__ import annotations
 from naming import Name, File, Pipe, PipeFile  # bring standard names to this module level
-from grill.ids import cgasset
+from grill import ids
 
 
 class Project(Name):
@@ -218,25 +218,24 @@ class CGAsset(Name):
     ------------------------
     *code*      Any amount of word characters
     *env*       Any amount of word characters
-    *typ*       Any amount of word characters
+    *cluster*   Any amount of word characters
     *kind*      Any amount of word characters
     *area*      Any amount of word characters
     *branch*    Any amount of word characters
     *item*      Any amount of word characters
-    *proc*      Any amount of word characters
-    *var*       Any amount of word characters
+    *step*      Any amount of word characters
+    *variant*   Any amount of word characters
     *part*      Any amount of word characters
     =========== ============
 
     Basic use::
 
-        >>> from grill.names import CGAsset
         >>> CGAsset().get_name()
-        '{code}-{env}-{typ}-{kind}-{area}-{branch}-{item}-{proc}-{var}-{part}'
+        >>> '{code}-{env}-{cluster}-{kind}-{area}-{branch}-{item}-{step}-{variant}-{part}'
         >>> CGAsset.get_default(area='concept_art')
-        CGAsset("demo-3d-abc-subcomponent-concept_art-master-atom-main-all-world")
+        >>> CGAsset("demo-3d-abc-component-concept_art-master-atom-main-all-whole")
     """
-    config = dict.fromkeys(cgasset.IDS, '\w+')
+    config = {k: v['pattern'] for k, v in ids.CGAsset.items()}
     drops = 'base',
 
     def __init__(self, *args, sep='-', **kwargs):
@@ -244,7 +243,7 @@ class CGAsset(Name):
 
     @property
     def _defaults(self):
-        return {k: v['default'] for k, v in cgasset.IDS.items()}
+        return {k: v['default'] for k, v in ids.CGAsset.items()}
 
     @classmethod
     def get_default(cls, **kwargs) -> CGAsset:
