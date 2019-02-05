@@ -1,6 +1,7 @@
 .idea/
 *__pycache__*
 docs/build/
+build/
 dist/
 grill_names.egg-info/
 *.pyc
