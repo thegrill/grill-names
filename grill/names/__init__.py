@@ -218,23 +218,22 @@ class CGAsset(Name):
     ------------------------
     *code*      Any amount of word characters
     *env*       Any amount of word characters
-    *typ*       Any amount of word characters
+    *cluster*   Any amount of word characters
     *kind*      Any amount of word characters
     *area*      Any amount of word characters
     *branch*    Any amount of word characters
     *item*      Any amount of word characters
-    *proc*      Any amount of word characters
-    *var*       Any amount of word characters
+    *step*      Any amount of word characters
+    *variant*   Any amount of word characters
     *part*      Any amount of word characters
     =========== ============
 
     Basic use::
 
-        >>> from grill.names import CGAsset
         >>> CGAsset().get_name()
-        '{code}-{env}-{typ}-{kind}-{area}-{branch}-{item}-{proc}-{var}-{part}'
+        >>> '{code}-{env}-{cluster}-{kind}-{area}-{branch}-{item}-{step}-{variant}-{part}'
         >>> CGAsset.get_default(area='concept_art')
-        CGAsset("demo-3d-abc-subcomponent-concept_art-master-atom-main-all-world")
+        >>> CGAsset("demo-3d-abc-component-concept_art-master-atom-main-all-whole")
     """
     config = {k: v['pattern'] for k, v in ids.CGAsset.items()}
     drops = 'base',

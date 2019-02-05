@@ -9,8 +9,7 @@ def __getattr__(name):
     cfg_fname = f'{name}.cfg'
     if resources.is_resource(__name__, cfg_fname):
         cfg = configparser.ConfigParser({'default': '', 'pattern': '\w+'})
-        cfg_str = resources.read_text(__name__, cfg_fname)
-        cfg.read_string(cfg_str)
+        cfg.read_string(resources.read_text(__name__, cfg_fname))
         return MappingProxyType({s: MappingProxyType(dict(cfg[s])) for s in cfg.sections()})
     raise AttributeError(f"module {__name__} has no attribute {name}")
 
