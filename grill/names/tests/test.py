@@ -82,6 +82,6 @@ class TestNames(unittest.TestCase):
 
     def test_cgasset(self):
         self.assertEqual(CGAsset().get_name(),
-                         '{code}-{env}-{cluster}-{kind}-{area}-{branch}-{item}-{step}-{variant}-{part}')
+                         '{code}-{env}-{kingdom}-{cluster}-{area}-{branch}-{item}-{step}-{variant}-{part}')
         self.assertEqual(CGAsset.get_default().name,
-                         'demo-3d-abc-component-rnd-master-atom-main-all-whole')
+                         'demo-3d-abc-entity-rnd-master-atom-main-all-whole')
