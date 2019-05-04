@@ -7,7 +7,7 @@ setup(
     packages=find_packages(
         exclude=("*.tests", "*.tests.*", "tests.*", "tests", "*.docs", "*.docs.*", "docs.*", "docs")),
     package_data={
-        'grill.ids': ['*.cfg'],
+        'grill.tokens.ids': ['*.cfg'],
     },
     description='Name objects for digital content creation.',
     author='Christian López Barrón',
