@@ -8,5 +8,6 @@ Class List
     AssetFile
     CGAsset
     Environment
+    LifeTR
     Primitive
     Project

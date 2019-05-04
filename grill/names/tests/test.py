@@ -85,3 +85,19 @@ class TestNames(unittest.TestCase):
                          '{code}-{env}-{kingdom}-{cluster}-{area}-{branch}-{item}-{step}-{variant}-{part}')
         self.assertEqual(CGAsset.get_default().name,
                          'demo-3d-abc-entity-rnd-master-atom-main-all-whole')
+
+    def test_lifetr(self):
+        domain = 'Eukarya'
+        kingdom = 'Plantae'
+        phylum = 'Magnoliophyta (Tracheophyta)'
+        klass = 'Magnoliopsida (Equisetopsida)'
+        order = 'Fabales'
+        family = 'Fabaceae'
+        genius = 'Pisum'
+        species = 'P. sativum'
+        form = 'Pea'
+        name = LifeTR(f'{domain}:{kingdom}:{phylum}:{klass}:'
+                      f'{order}:{family}:{genius}:{species}:{form}')
+        self.assertEqual(name.domain, domain)
+        with self.assertRaises(ValueError):
+            name.kingdom = ' must start with word char'

@@ -1,6 +1,36 @@
 from __future__ import annotations
-from naming import Name, File, Pipe, PipeFile  # bring standard names to this module level
-from grill import ids
+from naming import Name, File, Pipe, PipeFile, BaseName
+from grill.tokens import ids
+
+
+def _table_from_id(id_mapping):
+    headers = [
+        'Token',
+        'Pattern',
+        'Default',
+        'Description',
+    ]
+    table_sep = tuple([''] * len(headers))
+    sorter = lambda m: (
+        # cleanup backslashes formatting
+        m["pattern"].replace('\\', '\\\\'),
+        m['default'],
+        # replace new lines with empty strings to avoid malformed tables.
+        m['description'].replace('\n', ' '),
+    )
+    rows = [table_sep, headers, table_sep]
+    rows.extend([token, *sorter(values)] for token, values in id_mapping.items())
+    rows.append(table_sep)
+    max_sizes = [(max(len(i) for i in r)) for r in zip(*rows)]
+
+    format_rows = []
+    for r in rows:
+        filler = '=<' if r == table_sep else ''
+        format_rows.append(' '.join(
+            f"{{:{f'{filler}'}{f'{size}'}}}".format(i)
+            for size, i in zip(max_sizes, r))
+        )
+    return '\n'.join(format_rows)
 
 
 class Project(Name):
@@ -175,7 +205,10 @@ class Asset(Primitive):
     @classmethod
     def get_default(cls, **kwargs) -> Asset:
         """Get a new Name object with default values and optional field names from **kwargs."""
-        return _from_cls_defaults(cls, **kwargs)
+        name = cls()
+        defaults = dict(name._defaults, **kwargs)
+        name.name = name.get_name(**defaults)
+        return name
 
     @property
     def _defaults(self):
@@ -209,51 +242,33 @@ class AssetFile(Asset, PipeFile):
         return pattern
 
 
-class CGAsset(Name):
-    """Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
+class CGAsset(BaseName):
+    """
+    Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
     through their life cycles (e.g. a character, a film, a videogame).
 
-    =========== ============
-    **Config:**
-    ------------------------
-    *code*      Any amount of word characters
-    *env*       Any amount of word characters
-    *cluster*   Any amount of word characters
-    *kind*      Any amount of word characters
-    *area*      Any amount of word characters
-    *branch*    Any amount of word characters
-    *item*      Any amount of word characters
-    *step*      Any amount of word characters
-    *variant*   Any amount of word characters
-    *part*      Any amount of word characters
-    =========== ============
-
-    Basic use::
-
-        >>> CGAsset().get_name()
-        >>> '{code}-{env}-{cluster}-{kind}-{area}-{branch}-{item}-{step}-{variant}-{part}'
-        >>> CGAsset.get_default(area='concept_art')
-        >>> CGAsset("demo-3d-abc-component-concept_art-master-atom-main-all-whole")
     """
     config = {k: v['pattern'] for k, v in ids.CGAsset.items()}
-    drops = 'base',
+    __doc__ += '\n' + _table_from_id(ids.CGAsset) + '\n'
 
     def __init__(self, *args, sep='-', **kwargs):
         super().__init__(*args, sep=sep, **kwargs)
 
-    @property
-    def _defaults(self):
-        return {k: v['default'] for k, v in ids.CGAsset.items()}
-
     @classmethod
     def get_default(cls, **kwargs) -> CGAsset:
-        """Get a new Name object with default values and optional field names from **kwargs."""
-        return _from_cls_defaults(cls, **kwargs)
+        """Get a new Name object with default values and overrides from **kwargs."""
+        name = cls()
+        defaults = dict({k: v['default'] for k, v in ids.CGAsset.items()}, **kwargs)
+        name.name = name.get_name(**defaults)
+        return name
 
 
-def _from_cls_defaults(cls, **kwargs):
-    name = cls()
-    defaults = name._defaults
-    defaults.update(kwargs)
-    name.name = name.get_name(**defaults)
-    return name
+class LifeTR(BaseName):
+    """Taxonomic Rank used for biological classification.
+
+    """
+    config = {k: v['pattern'] for k, v in ids.LifeTR.items()}
+    __doc__ += '\n' + _table_from_id(ids.LifeTR) + '\n'
+
+    def __init__(self, *args, sep=':', **kwargs):
+        super().__init__(*args, sep=sep, **kwargs)
