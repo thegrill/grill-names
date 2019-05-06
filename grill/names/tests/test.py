@@ -49,36 +49,26 @@ class TestNames(unittest.TestCase):
         name.name = name.get_name(**_get_primitive_kwargs())
         self.assertEqual('tstabc_current_hero_concept', name.name)
 
-    def test_asset(self):
-        name = AssetFile()
-        name.name = name.get_name(**_get_assetfile_kwargs())
+    def test_cgasset_file(self):
+        name = CGAssetFile().get_default()
         name.name = name.get_name(area='model')
-        self.assertEqual(name.workarea, 'schrmodel')
-        path = Path.joinpath(Path(), 'abc', 'tst', 'pro', 's', 'chr', 'hero', 'model', 'concept', 'original', 'master',
-                             'default', '0', 'tstabc_schrmodel_hero_concept_original_master_default.0.ext')
+        self.assertEqual(name.area, 'model')
+        path = Path.joinpath(
+            Path(),
+            'demo', '3d', 'abc', 'entity', 'model', 'master', 'atom', 'main', 'all',
+            'whole', '1', 'demo-3d-abc-entity-model-master-atom-main-all-whole.1.ext'
+        )
         self.assertEqual(Path(path), name.path)
-        name.sep = '-'
-        self.assertEqual('-', name.sep)
-        self.assertEqual('tstabc-schrmodel-hero-concept-original-master-default.0.ext', name.get_name())
+        name.sep = ':'
+        self.assertEqual(':', name.sep)
+        self.assertEqual('demo:3d:abc:entity:model:master:atom:main:all:whole.1.ext', name.get_name())
         name.sep = '.'
         self.assertEqual(name.sep, '.')
-        self.assertEqual('tstabc.schrmodel.hero.concept.original.master.default.0.ext', name.get_name())
+        self.assertEqual('demo.3d.abc.entity.model.master.atom.main.all.whole.1.ext', name.get_name())
         name.sep = ' '
-        name.name = name.get_name(area='rig')
-        self.assertEqual('schrrig', name.workarea)
-        self.assertEqual(' ', name.sep)
-        self.assertEqual('tstabc schrrig hero concept original master default.0.ext', name.get_name())
-        name.sep = '_'
-        name.branch = 'dev'
-        path = Path.joinpath(Path(), 'abc', 'tst', 'dev', 's', 'chr', 'hero', 'rig', 'concept', 'original', 'master',
-                             'default', '0', 'tstabc_schrrig_hero_concept_original_master_default.0.ext')
-        self.assertEqual(Path(path), name.path)
-
-    def test_asset_default(self):
-        name = Asset.get_default(prim='hero')
-        self.assertEqual(name.name, 'envcode_kgrparea_hero_stage_original_master_default')
-        name = AssetFile.get_default()
-        self.assertEqual(name.name, 'envcode_kgrparea_prim_stage_original_master_default.0.ext')
+        name.name = name.get_name(area='rig', part='leg', output='skin', branch='dev')
+        self.assertEqual('rig', name.area)
+        self.assertEqual('demo 3d abc entity rig dev atom main all leg.skin.1.ext', name.get_name())
 
     def test_cgasset(self):
         self.assertEqual(CGAsset().get_name(),
