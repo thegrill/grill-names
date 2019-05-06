@@ -99,9 +99,6 @@ class Environment(Project):
     config = dict(environment='[a-z]{3}', code='[a-z0-9]+')
     compounds = dict(project=('environment', 'code'))
 
-    def get_path_pattern_list(self):
-        return ['code', 'environment', 'workarea']
-
 
 class Primitive(Environment):
     """
@@ -133,7 +130,7 @@ class Primitive(Environment):
 
 class CGAsset(naming.Name):
     """Inherited by: :class:`grill.names.CGAssetFile`
-    
+
     Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
     through their life cycles (e.g. a character, a film, a videogame).
 

@@ -17,18 +17,6 @@ def _get_primitive_kwargs():
     return values
 
 
-def _get_asset_kwargs():
-    values = _get_primitive_kwargs()
-    values.update(workarea='schrgeo', variant='original', partition='master', layer='default')
-    return values
-
-
-def _get_assetfile_kwargs():
-    values = _get_asset_kwargs()
-    values.update(version=0, suffix='ext')
-    return values
-
-
 class TestNames(unittest.TestCase):
 
     def test_project(self):
