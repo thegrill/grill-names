@@ -132,7 +132,8 @@ class Primitive(Environment):
 
 
 class CGAsset(naming.Name):
-    """
+    """Inherited by: :class:`grill.names.CGAssetFile`
+    
     Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
     through their life cycles (e.g. a character, a film, a videogame).
 
