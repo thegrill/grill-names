@@ -4,9 +4,9 @@ Class List
 .. toctree::
     :maxdepth: 4
 
-    Asset
-    AssetFile
     CGAsset
+    CGAssetFile
     Environment
+    LifeTR
     Primitive
     Project

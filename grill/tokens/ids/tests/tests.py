@@ -1,5 +1,5 @@
 import unittest
-from grill import ids
+from grill.tokens import ids
 
 
 class TestIDs(unittest.TestCase):
