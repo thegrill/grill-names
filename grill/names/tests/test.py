@@ -5,18 +5,6 @@ from pathlib import Path
 from grill.names import *
 
 
-def _get_project_kwargs():
-    project = 'tstabc'
-    workarea = 'current'
-    return locals()
-
-
-def _get_primitive_kwargs():
-    values = _get_project_kwargs()
-    values.update(prim='hero', stage='concept')
-    return values
-
-
 class TestNames(unittest.TestCase):
 
     def test_cgasset_file(self):
