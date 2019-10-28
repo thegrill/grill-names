@@ -6,5 +6,6 @@ Class List
 
     CGAsset
     CGAssetFile
+    DefaultName
     LifeTR
     TimeFile

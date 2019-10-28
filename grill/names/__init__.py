@@ -62,7 +62,7 @@ class TimeFile(naming.File, DefaultName):
     ============= ================
     **Config:**
     ------------------------------
-    *year*        Between :const:`datetime.MINYEAR` and :const:`datetime.MAXYEAR` inclusive.
+    *year*        Between :py:data:`datetime.MINYEAR` and :py:data:`datetime.MAXYEAR` inclusive.
     *month*       Between 1 and 12 inclusive.
     *day*         Between 1 and the number of days in the given month of the given year.
     *hour*        In ``range(24)``.
@@ -78,8 +78,10 @@ class TimeFile(naming.File, DefaultName):
     *time*  `hour` `minute` `second` `microsecond`
     ======  ============
 
-    When getting a new default name, current ISO time at the moment of execution is used.
-    This can be then used to get a :classmethod:`datetime.fromisoformat`
+    .. note::
+        When getting a new default name, current ISO time at the moment of execution is used.
+        This can be used with :py:meth:`datetime.datetime.fromisoformat` to get :py:class:`datetime.datetime` objects.
+
     Example::
         >>> tf = TimeFile.get_default(suffix='txt')
         >>> tf.day
@@ -117,6 +119,7 @@ class TimeFile(naming.File, DefaultName):
         )
 
     def get_pattern_list(self) -> typing.List[str]:
+        """Ordered fields to solve this name. Defaults to [`date`, `time`]"""
         return ["date", "time"]
 
     @property
@@ -138,7 +141,13 @@ class TimeFile(naming.File, DefaultName):
                     self.name = prev_name
                 raise
     @property
-    def isoformat(self):
+    def isoformat(self) -> str:
+        """ Return a string representing this name values as date in ISO 8601 format.
+
+        >>> tf = TimeFile("1999-10-28 22-29-31-926548.txt")
+        >>> tf.isoformat
+        '1999-10-28T22:29:31.926548'
+        """
         isodate = f"{int(self.year):04d}-{int(self.month):02d}-{int(self.day):02d}"
         isoclock = (f"{int(self.hour):02d}:{int(self.minute):02d}:{int(self.second):02d}.{int(self.microsecond):06d}")
         return f'{isodate}T{isoclock}'
