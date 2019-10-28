@@ -1,4 +1,7 @@
 from __future__ import annotations
+import typing
+from datetime import datetime
+
 import naming
 from grill.tokens import ids
 
@@ -33,102 +36,125 @@ def _table_from_id(id_mapping):
     return '\n'.join(format_rows)
 
 
-class Project(naming.Name):
-    """Inherited by: :class:`grill.names.Environment`
+class DefaultName(naming.Name):
+    """ Inherited by: :class:`grill.names.CGAsset` :class:`grill.names.TimeFile`
 
-    Project Name objects.
+    Base class for any Name object that wishes to provide `default` functionality via
+    the `get_default` method.
 
-    ==========  ==========
+    Subclass implementations can override the `_defaults` member to return a mapping
+    appropriate to that class.
+    """
+    _defaults = {}
+
+    @classmethod
+    def get_default(cls, **kwargs) -> DefaultName:
+        """Get a new Name object with default values and overrides from **kwargs."""
+        name = cls()
+        defaults = dict(name._defaults, **kwargs)
+        name.name = name.get_name(**defaults)
+        return name
+
+
+class TimeFile(naming.File, DefaultName):
+    """Time based file names respecting iso standard.
+
+    ============= ================
     **Config:**
-    ----------------------
-    *project*   Any amount of characters in the class [a-zA-Z0-9]
-    *workarea*  Any amount of word characters
-    ==========  ==========
+    ------------------------------
+    *year*        Between :py:data:`datetime.MINYEAR` and :py:data:`datetime.MAXYEAR` inclusive.
+    *month*       Between 1 and 12 inclusive.
+    *day*         Between 1 and the number of days in the given month of the given year.
+    *hour*        In ``range(24)``.
+    *minute*      In ``range(60)``.
+    *second*      In ``range(60)``.
+    *microsecond* In ``range(1000000)``.
+    ============= ================
 
-    Basic use::
+    ======  ============
+    **Composed Fields:**
+    --------------------
+    *date*  `year` `month` `day`
+    *time*  `hour` `minute` `second` `microsecond`
+    ======  ============
 
-        >>> from grill.names import Project
-        >>> p = Project()
-        >>> p.get_name()
-        '[project]_[workarea]'
-        >>> f.get_name(workarea='foo')
-        '[project]_foo'
-        >>> p.name = 'test_concept_art'
-        >>> p.values
-        {'project': 'test', 'workarea': 'concept_art'}
-        >>> p.workarea = 'rigging'
-        >>> p.name
-        'test_rigging'
+    .. note::
+        When getting a new default name, current ISO time at the moment of execution is used.
+        This can be used with :py:meth:`datetime.datetime.fromisoformat` to get :py:class:`datetime.datetime` objects.
+
+    Example::
+        >>> tf = TimeFile.get_default(suffix='txt')
+        >>> tf.day
+        '28'
+        >>> tf.date
+        '2019-10-28'
+        >>> tf.year = 1999
+        >>> tf
+        TimeFile("1999-10-28 22-29-31-926548.txt")
+        >>> tf.month = 14  # ISO format validation
+        Traceback (most recent call last):
+            ...
+        ValueError: month must be in 1..12
+        >>> tf.isoformat
+        '1999-10-28T22:29:31.926548'
     """
-    config = dict(project='[a-zA-Z0-9]+', workarea='\w+')
 
-    def __init__(self, *args, sep='_', **kwargs):
-        super().__init__(*args, sep=sep, **kwargs)
+    config = dict.fromkeys(
+        ('year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond'), r'\d{1,2}'
+    )
+    config.update(year=r'\d{1,4}', microsecond=r'\d{1,6}')
+    join = dict(
+        date=('year', 'month', 'day'),
+        time=('hour', 'minute', 'second', 'microsecond'),
+    )
+    join_sep = '-'
 
+    @property
+    def _defaults(self):
+        time_field = {'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond'}
+        now = datetime.now()
+        return dict(
+            {f: getattr(now, f) for f in time_field},
+            suffix='ext',
+        )
 
-class Environment(Project):
-    """Inherited by: :class:`grill.names.Primitive`
+    def get_pattern_list(self) -> typing.List[str]:
+        """Ordered fields to solve this name. Defaults to [`date`, `time`]"""
+        return ["date", "time"]
 
-    Environment splits the project field to know more about where it belongs.
+    @property
+    def name(self):
+        return super().name
 
-    ============= ==========
-    **Config:**
-    ------------------------
-    *environment* Composed of 3 lowercase letters
-    *code*        Any amount of characters in the class [a-zA-Z0-9]
-    ============= ==========
+    @name.setter
+    def name(self, name: str):
+        prev_name = self._name
+        super(TimeFile, self.__class__).name.fset(self, name)
+        # validate with datetime isoformat directly
+        if name:
+            # if iso validation fails, we fail
+            # if we had a previous valid name, revert to it
+            try:
+                datetime.fromisoformat(self.isoformat)
+            except ValueError:
+                if prev_name:
+                    self.name = prev_name
+                raise
+    @property
+    def isoformat(self) -> str:
+        """ Return a string representing this name values as date in ISO 8601 format.
 
-    ========= ====
-    **Compounds:**
-    --------------
-    *project* environment, code
-    ========= ====
-
-    Basic use::
-
-        >>> from grill.names import Environment
-        >>> e = Environment('flmmultimedia_concept_art')
-        >>> e.values
-        {'project': 'flmmultimedia',
-        'environment': 'flm',
-        'code': 'multimedia',
-        'workarea': 'concept_art'}
-        >>> e.get_name(environment='gme')
-        'gmemultimedia_concept_art'
-    """
-    config = dict(environment='[a-z]{3}', code='[a-z0-9]+')
-    compounds = dict(project=('environment', 'code'))
-
-
-class Primitive(Environment):
-    """
-    For primitive names with multiple stages of development.
-
-    ======= ================
-    **Config:**
-    ------------------------
-    *prim*  Any amount of characters in the class [a-zA-Z0-9]
-    *stage* Any amount of characters in the class [a-zA-Z0-9]
-    ======= ================
-
-    Basic use::
-
-        >>> from grill.names import Primitive
-        >>> a = Primitive('prmtest_concept_art_hero_color')
-        >>> a.values
-        {'project': 'prmtest',
-        'environment': 'prm',
-        'code': 'test',
-        'workarea': 'concept_art',
-        'prim': 'hero',
-        'stage': 'color',
-        'version': '1',
-        'suffix': 'psd'}
-    """
-    config = dict(prim='[a-zA-Z0-9]+', stage='[a-z0-9]+')
+            >>> tf = TimeFile("1999-10-28 22-29-31-926548.txt")
+            >>> from datetime import datetime
+            >>> datetime.fromisoformat(tf.isoformat)
+            datetime.datetime(1999, 10, 28, 22, 29, 31, 926548)
+        """
+        isodate = f"{int(self.year):04d}-{int(self.month):02d}-{int(self.day):02d}"
+        isoclock = (f"{int(self.hour):02d}:{int(self.minute):02d}:{int(self.second):02d}.{int(self.microsecond):06d}")
+        return f'{isodate}T{isoclock}'
 
 
-class CGAsset(naming.Name):
+class CGAsset(DefaultName):
     """Inherited by: :class:`grill.names.CGAssetFile`
 
     Elemental resources that, when composed, generate the entities that bring an idea to a tangible product
@@ -144,14 +170,6 @@ class CGAsset(naming.Name):
     @property
     def _defaults(self):
         return {k: v['default'] for k, v in ids.CGAsset.items()}
-
-    @classmethod
-    def get_default(cls, **kwargs) -> CGAsset:
-        """Get a new Name object with default values and overrides from **kwargs."""
-        name = cls()
-        defaults = dict(name._defaults, **kwargs)
-        name.name = name.get_name(**defaults)
-        return name
 
 
 class CGAssetFile(CGAsset, naming.PipeFile):
