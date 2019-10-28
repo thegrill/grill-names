@@ -39,7 +39,7 @@ def _table_from_id(id_mapping):
 class DefaultName(naming.Name):
     """ Inherited by: :class:`grill.names.CGAsset` :class:`grill.names.TimeFile`
 
-    Base class for any Name object that wish to provide `default` functionality via
+    Base class for any Name object that wishes to provide `default` functionality via
     the `get_default` method.
 
     Subclass implementations can override the `_defaults` member to return a mapping
@@ -144,9 +144,10 @@ class TimeFile(naming.File, DefaultName):
     def isoformat(self) -> str:
         """ Return a string representing this name values as date in ISO 8601 format.
 
-        >>> tf = TimeFile("1999-10-28 22-29-31-926548.txt")
-        >>> tf.isoformat
-        '1999-10-28T22:29:31.926548'
+            >>> tf = TimeFile("1999-10-28 22-29-31-926548.txt")
+            >>> from datetime import datetime
+            >>> datetime.fromisoformat(tf.isoformat)
+            datetime.datetime(1999, 10, 28, 22, 29, 31, 926548)
         """
         isodate = f"{int(self.year):04d}-{int(self.month):02d}-{int(self.day):02d}"
         isoclock = (f"{int(self.hour):02d}:{int(self.minute):02d}:{int(self.second):02d}.{int(self.microsecond):06d}")
