@@ -5,37 +5,7 @@ from pathlib import Path
 from grill.names import *
 
 
-def _get_project_kwargs():
-    project = 'tstabc'
-    workarea = 'current'
-    return locals()
-
-
-def _get_primitive_kwargs():
-    values = _get_project_kwargs()
-    values.update(prim='hero', stage='concept')
-    return values
-
-
 class TestNames(unittest.TestCase):
-
-    def test_project(self):
-        name = Project()
-        name.name = name.get_name(**_get_project_kwargs())
-        self.assertEqual('tstabc_current', name.nice_name)
-
-    def test_environment(self):
-        name = Environment()
-        name.name = name.get_name(**_get_project_kwargs())
-        self.assertEqual('tst', name.environment)
-        name.environment = 'gme'
-        self.assertEqual('gme', name.environment)
-        self.assertEqual('abc', name.code)
-
-    def test_audiovisual(self):
-        name = Primitive()
-        name.name = name.get_name(**_get_primitive_kwargs())
-        self.assertEqual('tstabc_current_hero_concept', name.name)
 
     def test_cgasset_file(self):
         name = CGAssetFile().get_default()
@@ -79,3 +49,25 @@ class TestNames(unittest.TestCase):
         self.assertEqual(name.domain, domain)
         with self.assertRaises(ValueError):
             name.kingdom = ' must start with word char'
+
+    def test_time(self):
+        tf = DateTimeFile.get_default(date='2019-10-28', suffix='txt')
+        tf.year = 1999
+        current_name = tf.name
+        with self.assertRaises(ValueError):
+            tf.month = 14
+        # after attempting an incorrect iso value, we should kepe the last name
+        self.assertEqual(current_name, tf.name)
+        tf.hour = 1
+        tf.minute = 1
+        tf.second = 1
+        tf.microsecond = 1
+
+        tf2 = DateTimeFile(tf.name)
+        self.assertEqual("1999-10-28 1-1-1-1.txt", tf2.name)
+        self.assertEqual(datetime.fromisoformat("1999-10-28T01:01:01.000001"),
+                         tf2.datetime)
+
+        tf2.name = ""
+        with self.assertRaises(AttributeError):
+            tf2.datetime
