@@ -51,7 +51,7 @@ class TestNames(unittest.TestCase):
             name.kingdom = ' must start with word char'
 
     def test_time(self):
-        tf = TimeFile.get_default(date='2019-10-28', suffix='txt')
+        tf = DateTimeFile.get_default(date='2019-10-28', suffix='txt')
         tf.year = 1999
         current_name = tf.name
         with self.assertRaises(ValueError):
@@ -63,6 +63,11 @@ class TestNames(unittest.TestCase):
         tf.second = 1
         tf.microsecond = 1
 
-        tf2 = TimeFile(tf.name)
+        tf2 = DateTimeFile(tf.name)
         self.assertEqual("1999-10-28 1-1-1-1.txt", tf2.name)
-        self.assertEqual("1999-10-28T01:01:01.000001", tf2.isoformat)
+        self.assertEqual(datetime.fromisoformat("1999-10-28T01:01:01.000001"),
+                         tf2.datetime)
+
+        tf2.name = ""
+        with self.assertRaises(AttributeError):
+            tf2.datetime
