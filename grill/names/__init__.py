@@ -37,7 +37,7 @@ def _table_from_id(id_mapping):
 
 
 class DefaultName(naming.Name):
-    """ Inherited by: :class:`grill.names.CGAsset` :class:`grill.names.TimeFile`
+    """ Inherited by: :class:`grill.names.CGAsset` :class:`grill.names.DateTimeFile`
 
     Base class for any Name object that wishes to provide `default` functionality via
     the `get_default` method.
@@ -56,7 +56,7 @@ class DefaultName(naming.Name):
         return name
 
 
-class TimeFile(naming.File, DefaultName):
+class DateTimeFile(naming.File, DefaultName):
     """Time based file names respecting iso standard.
 
     ============= ================
@@ -80,23 +80,22 @@ class TimeFile(naming.File, DefaultName):
 
     .. note::
         When getting a new default name, current ISO time at the moment of execution is used.
-        This can be used with :py:meth:`datetime.datetime.fromisoformat` to get :py:class:`datetime.datetime` objects.
 
     Example::
-        >>> tf = TimeFile.get_default(suffix='txt')
+        >>> tf = DateTimeFile.get_default(suffix='txt')
         >>> tf.day
         '28'
         >>> tf.date
         '2019-10-28'
         >>> tf.year = 1999
         >>> tf
-        TimeFile("1999-10-28 22-29-31-926548.txt")
+        DateTimeFile("1999-10-28 22-29-31-926548.txt")
         >>> tf.month = 14  # ISO format validation
         Traceback (most recent call last):
             ...
         ValueError: month must be in 1..12
-        >>> tf.isoformat
-        '1999-10-28T22:29:31.926548'
+        >>> tf.datetime
+        datetime.datetime(1999, 10, 28, 22, 29, 31, 926548)
     """
 
     config = dict.fromkeys(
@@ -123,35 +122,36 @@ class TimeFile(naming.File, DefaultName):
         return ["date", "time"]
 
     @property
-    def name(self):
+    def name(self) -> str:
         return super().name
 
     @name.setter
     def name(self, name: str):
         prev_name = self._name
-        super(TimeFile, self.__class__).name.fset(self, name)
-        # validate with datetime isoformat directly
+        super(DateTimeFile, self.__class__).name.fset(self, name)
         if name:
-            # if iso validation fails, we fail
-            # if we had a previous valid name, revert to it
-            try:
-                datetime.fromisoformat(self.isoformat)
+            try:  # validate via datetime conversion
+                self.datetime
             except ValueError:
-                if prev_name:
+                if prev_name:  # if we had a previous valid name, revert to it
                     self.name = prev_name
                 raise
-    @property
-    def isoformat(self) -> str:
-        """ Return a string representing this name values as date in ISO 8601 format.
 
-            >>> tf = TimeFile("1999-10-28 22-29-31-926548.txt")
-            >>> from datetime import datetime
-            >>> datetime.fromisoformat(tf.isoformat)
+    @property
+    def datetime(self) -> datetime:
+        """ Return a :py:class:`datetime.datetime` object using this name values.
+
+            >>> from grill.names import DateTimeFile
+            >>> tf = DateTimeFile("1999-10-28 22-29-31-926548.txt")
+            >>> tf.datetime
             datetime.datetime(1999, 10, 28, 22, 29, 31, 926548)
         """
-        isodate = f"{int(self.year):04d}-{int(self.month):02d}-{int(self.day):02d}"
-        isoclock = (f"{int(self.hour):02d}:{int(self.minute):02d}:{int(self.second):02d}.{int(self.microsecond):06d}")
-        return f'{isodate}T{isoclock}'
+        if not self.name:
+            raise AttributeError("Can not retrieve datetime from an empty name")
+        date = f"{int(self.year):04d}-{int(self.month):02d}-{int(self.day):02d}"
+        time = (f"{int(self.hour):02d}:{int(self.minute):02d}:{int(self.second):02d}."
+                f"{int(self.microsecond):06d}")
+        return datetime.fromisoformat(f'{date}T{time}')
 
 
 class CGAsset(DefaultName):
