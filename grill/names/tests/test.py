@@ -71,3 +71,10 @@ class TestNames(unittest.TestCase):
         tf2.name = ""
         with self.assertRaises(AttributeError):
             tf2.datetime
+
+    def test_sub_datetime(self):
+        class SubTime(DateTimeFile):
+            config = dict(extra=r'\w+')
+
+        tf = SubTime("1999-10-28 1-1-1-1 subclassed.txt")
+        self.assertEqual("subclassed", tf.extra)
