@@ -99,7 +99,7 @@ class DateTimeFile(naming.File, DefaultName):
     """
 
     config = dict.fromkeys(
-        ('year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond'), r'\d{1,2}'
+        ('month', 'day', 'hour', 'minute', 'second'), r'\d{1,2}'
     )
     config.update(year=r'\d{1,4}', microsecond=r'\d{1,6}')
     join = dict(
@@ -118,8 +118,11 @@ class DateTimeFile(naming.File, DefaultName):
         )
 
     def get_pattern_list(self) -> typing.List[str]:
-        """Ordered fields to solve this name. Defaults to [`date`, `time`]"""
-        return ["date", "time"]
+        """Fields / properties names (sorted) to be used when building names.
+
+        Defaults to [`date`, `time`] + keys of this name's config
+        """
+        return ["date", "time"] + list(self.config)
 
     @property
     def name(self) -> str:
