@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from setuptools import setup, find_namespace_packages
 
-_VERSION = '1.5.0'
+_VERSION = '1.5.1'
 setup(
     name='grill-names',
     version=_VERSION,
