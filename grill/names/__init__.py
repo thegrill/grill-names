@@ -195,7 +195,7 @@ class CGAssetFile(CGAsset, naming.PipeFile):
         result.update(version=1, suffix='ext')
         return result
 
-    def get_path_pattern_list(self):
+    def get_path_pattern_list(self) -> typing.List[str]:
         pattern = super().get_pattern_list()
         pattern.append('version')
         return pattern
