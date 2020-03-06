@@ -52,7 +52,7 @@ class DefaultName(naming.Name):
         """Get a new Name object with default values and overrides from **kwargs."""
         name = cls()
         defaults = dict(name._defaults, **kwargs)
-        name.name = name.get_name(**defaults)
+        name.name = name.get(**defaults)
         return name
 
 

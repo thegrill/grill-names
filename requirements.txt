@@ -1,1 +1,1 @@
-naming
+naming>=0.5

@@ -20,6 +20,6 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     extras_require={'docs': ['sphinx_autodoc_typehints', 'sphinx_rtd_theme']},
-    install_requires=['naming'],
+    install_requires=['naming>=0.5'],
     namespace_packages=['grill']
 )
