@@ -1,7 +1,6 @@
-# standard
 import unittest
 from pathlib import Path
-# package
+
 from grill.names import *
 
 
@@ -9,7 +8,7 @@ class TestNames(unittest.TestCase):
 
     def test_cgasset_file(self):
         name = CGAssetFile().get_default()
-        name.name = name.get_name(area='model')
+        name.name = name.get(area='model')
         self.assertEqual(name.area, 'model')
         path = Path.joinpath(
             Path(),
@@ -19,17 +18,17 @@ class TestNames(unittest.TestCase):
         self.assertEqual(Path(path), name.path)
         name.sep = ':'
         self.assertEqual(':', name.sep)
-        self.assertEqual('demo:3d:abc:entity:model:master:atom:main:all:whole.1.ext', name.get_name())
+        self.assertEqual('demo:3d:abc:entity:model:master:atom:main:all:whole.1.ext', name.get())
         name.sep = '.'
         self.assertEqual(name.sep, '.')
-        self.assertEqual('demo.3d.abc.entity.model.master.atom.main.all.whole.1.ext', name.get_name())
+        self.assertEqual('demo.3d.abc.entity.model.master.atom.main.all.whole.1.ext', name.get())
         name.sep = ' '
-        name.name = name.get_name(area='rig', part='leg', output='skin', branch='dev')
+        name.name = name.get(area='rig', part='leg', output='skin', branch='dev')
         self.assertEqual('rig', name.area)
-        self.assertEqual('demo 3d abc entity rig dev atom main all leg.skin.1.ext', name.get_name())
+        self.assertEqual('demo 3d abc entity rig dev atom main all leg.skin.1.ext', name.get())
 
     def test_cgasset(self):
-        self.assertEqual(CGAsset().get_name(),
+        self.assertEqual(CGAsset().get(),
                          '{code}-{env}-{kingdom}-{cluster}-{area}-{branch}-{item}-{step}-{variant}-{part}')
         self.assertEqual(CGAsset.get_default().name,
                          'demo-3d-abc-entity-rnd-master-atom-main-all-whole')
