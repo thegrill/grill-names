@@ -21,5 +21,5 @@ setup(
     ],
     extras_require={'docs': ['sphinx_autodoc_typehints', 'sphinx_rtd_theme']},
     install_requires=['naming>=0.5'],
-    namespace_packages=['grill']
+    namespace_packages=['grill'],
 )
