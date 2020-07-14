@@ -29,7 +29,7 @@ class TestNames(unittest.TestCase):
 
     def test_cgasset(self):
         self.assertEqual(CGAsset().get(),
-                         '{code}-{env}-{kingdom}-{cluster}-{area}-{stream}-{item}-{step}-{variant}-{part}')
+                         '{code}-{media}-{kingdom}-{cluster}-{area}-{stream}-{item}-{step}-{variant}-{part}')
         self.assertEqual(CGAsset.get_default().name,
                          'demo-3d-abc-entity-rnd-lead-atom-main-all-whole')
 
