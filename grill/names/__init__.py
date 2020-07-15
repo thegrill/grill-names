@@ -144,7 +144,6 @@ class DateTimeFile(naming.File, DefaultName):
     def datetime(self) -> datetime:
         """ Return a :py:class:`datetime.datetime` object using this name values.
 
-            >>> from grill.names import DateTimeFile
             >>> tf = DateTimeFile("1999-10-28 22-29-31-926548.txt")
             >>> tf.datetime
             datetime.datetime(1999, 10, 28, 22, 29, 31, 926548)
@@ -180,13 +179,12 @@ class CGAssetFile(CGAsset, naming.PipeFile):
 
     Basic use::
 
-        >>> from grill.names import CGAssetFile
         >>> name = CGAssetFile.get_default(version=7)
         >>> name.suffix
         'ext'
         >>> name.suffix = 'abc'
         >>> name.path
-        WindowsPath('demo/3d/abc/entity/rnd/master/atom/main/all/whole/7/demo-3d-abc-entity-rnd-master-atom-main-all-whole.7.abc')
+        WindowsPath('demo/3d/abc/entity/rnd/lead/atom/main/all/whole/7/demo-3d-abc-entity-rnd-lead-atom-main-all-whole.7.abc')
     """
 
     @property
@@ -202,9 +200,7 @@ class CGAssetFile(CGAsset, naming.PipeFile):
 
 
 class LifeTR(naming.Name):
-    """Taxonomic Rank used for biological classification.
-
-    """
+    """Taxonomic Rank used for biological classification."""
     config = {k: v['pattern'] for k, v in ids.LifeTR.items()}
     __doc__ += '\n' + _table_from_id(ids.LifeTR) + '\n'
 
