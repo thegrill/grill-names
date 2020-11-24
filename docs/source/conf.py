@@ -56,7 +56,7 @@ toggleprompt_offset_right = 25
 
 # Add any paths that contain templates here, relative to this directory.
 # templates_path = ['_templates']
-templates_path = ['']
+templates_path = ['_templates']
 
 # graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
 # graphviz_dot_args = ['- rankdir LR']
@@ -169,7 +169,16 @@ html_theme_options = {
     # 'github_user': 'typlog',
     # 'github_repo': 'sphinx-typlog-theme',
     'meta_html': '<meta name="generator" content="sphinx">',
+    'description': 'Your project description',
+    'github_user': 'thegrill',
+    'github_repo': 'grill-names'
     # 'warning': 'This is a global <a href="#">warnning</a> message',
+}
+html_sidebars = {
+    '**': [
+        'github.html',
+        ...
+    ]
 }
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
