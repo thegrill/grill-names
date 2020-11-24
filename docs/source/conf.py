@@ -55,7 +55,8 @@ extensions = ['sphinx.ext.autodoc',
 toggleprompt_offset_right = 25
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+# templates_path = ['_templates']
+templates_path = ['']
 
 # graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
 # graphviz_dot_args = ['- rankdir LR']
