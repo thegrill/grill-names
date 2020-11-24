@@ -32,8 +32,3 @@ Names
     DateTimeFile
     DefaultName
     LifeTR
-
-Indices and tables
-==================
-
-* :ref:`genindex`
