@@ -161,7 +161,15 @@ html_theme = 'sphinx_typlog_theme'
 # documentation.
 #
 # html_theme_options = {}
-
+html_theme_options = {
+    # 'color': '#E8371A',
+    # 'logo': 'typlog-512.png',
+    # 'description': 'A sphinx theme designed by Typlog.',
+    # 'github_user': 'typlog',
+    # 'github_repo': 'sphinx-typlog-theme',
+    'meta_html': '<meta name="generator" content="sphinx">',
+    # 'warning': 'This is a global <a href="#">warnning</a> message',
+}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
