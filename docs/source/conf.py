@@ -104,6 +104,8 @@ inheritance_edge_attrs = dict(color='"#123a54"')
 
 autodoc_member_order = 'groupwise'
 autodoc_default_flags = ['members', 'show-inheritance']
+
+graphviz_output_format = 'svg'
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
