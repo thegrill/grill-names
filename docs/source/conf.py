@@ -61,7 +61,7 @@ togglebutton_hint = " "
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
+# graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
 # inheritance_graph_attrs = dict(rankdir="LR", size='"6.0, 8.0"',fontsize=14, ratio='compress')
 inheritance_graph_attrs = dict(rankdir="TB", bgcolor='transparent')
 
@@ -128,11 +128,11 @@ html_theme = 'sphinx_rtd_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {}
+# html_theme_options = {}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 
 # -- Options for HTMLHelp output ------------------------------------------
