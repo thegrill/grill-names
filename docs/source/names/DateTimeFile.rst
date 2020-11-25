@@ -1,11 +1,8 @@
 DateTimeFile
-============
-
-.. toctree::
-    :maxdepth: 4
+------------
 
 .. admonition:: Inheritance Diagram for DateTimeFile
-   :class: dropdown, tip
+   :class: dropdown, note
 
    .. inheritance-diagram:: grill.names.DateTimeFile
 

@@ -1,11 +1,8 @@
 CGAssetFile
-===========
-
-.. toctree::
-    :maxdepth: 4
+-----------
 
 .. admonition:: Inheritance Diagram for CGAssetFile
-   :class: dropdown, info
+   :class: dropdown, note
 
    .. inheritance-diagram:: grill.names.CGAssetFile
 
