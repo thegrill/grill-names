@@ -6,7 +6,7 @@ CGAsset
 
 .. toggle:: Here's my title
 
-    Inheritance Diagram for grill.names.CGAsset
+    Inheritance DiagraSSSm for grill.names.CGAsset
 
     .. inheritance-diagram:: grill.names.CGAsset
 
