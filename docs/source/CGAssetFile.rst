@@ -5,7 +5,7 @@ CGAssetFile
     :maxdepth: 4
 
 .. admonition:: Inheritance Diagram
-   :class: dropdown, hint
+   :class: dropdown, info
 
    .. inheritance-diagram:: grill.names.CGAssetFile
 

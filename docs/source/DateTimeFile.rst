@@ -5,7 +5,7 @@ DateTimeFile
     :maxdepth: 4
 
 .. admonition:: Inheritance Diagram
-   :class: dropdown, note
+   :class: dropdown, tip
 
    .. inheritance-diagram:: grill.names.DateTimeFile
 
