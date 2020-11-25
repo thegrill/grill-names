@@ -4,10 +4,10 @@ CGAsset
 .. toctree::
     :maxdepth: 4
 
-.. admonition:: Here's my title
-   :class: dropdown, info
+.. admonition:: Here's my titlezz
+   :class: dropdown, hint
 
-   My note
+   My notezz
 
 .. toggle:: Here's my title
 
