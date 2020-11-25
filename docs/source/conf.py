@@ -43,50 +43,24 @@ extensions = ['sphinx.ext.autodoc',
               # 'sphinx.ext.imgmath',
               # 'sphinx.ext.ifconfig',
               'sphinx.ext.viewcode',
-              # 'sphinx.ext.githubpages',
               'sphinx.ext.graphviz',
               'sphinx.ext.inheritance_diagram',
               'sphinx.ext.autosectionlabel',
+              'sphinx_copybutton',
+              'sphinx_toggleprompt',
+              'sphinx_togglebutton',
+              'm2r2',
               'sphinx_autodoc_typehints']
+
+# Offset to play well with copybutton
+toggleprompt_offset_right = 25
+
+togglebutton_hint = " "
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
 # graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
-# graphviz_dot_args = ['- rankdir LR']
-# graphviz_dot_args = ['-Lg']
-# graphviz_dot_args = [
-#     '-Gbgcolor=transparent',
-#     '-Gfontcolor=#2573a7',
-#     # '-Nshape=oval',
-#     # '-Nshape=circle',
-#     '-Grankdir=TB',
-#     # '-Gstyle=filled',
-#     # '-Gfillcolor=yellow;0.3:blue'
-#     # '-Gperipheries=1',
-#     # '-Ncolor=#4399FF'
-#     # '-Nstyle=filled',
-#     # '-Nfillcolor=red'
-#     '-Ncolor=#2573a7',
-#     # '-Nstyle="filled"',
-#     # '-Ncolor="blue"',
-#     # '-Nstyle="filled" -Nfillcolor="#ddddff"',
-#     # '-Nstyle=filled',
-#     # '-Nbgcolor=#2980b9',
-#     # '-Nfillcolor=red',
-#     # '-Nstyle=filled',
-#     '-Ecolor=#2573a7',
-#     # '-Ecolor=#4399FF',
-#     # '-Gbgcolor=# fcfcfc'
-# # '-Lg'
-# # '-Nshape=box'
-# # '-Ncolor=black'
-# # '-Gbgcolor=transparent', '-Nshape=sphere', '-Nfontname=courier'
-# # '-Gfontname=Simsun', '-Efontname=Simsun', '-Nfontname=Simsun'
-# # '-s32',
-# # '-Gratio=compress'
-# # '-Gsize=8.0,12.0',
-# # '-Ncolor=#465158'
-# ]
 # inheritance_graph_attrs = dict(rankdir="LR", size='"6.0, 8.0"',fontsize=14, ratio='compress')
 inheritance_graph_attrs = dict(rankdir="TB", bgcolor='transparent')
 
@@ -98,11 +72,12 @@ inheritance_edge_attrs = dict(color='"#123a54"')
 
 autodoc_member_order = 'groupwise'
 autodoc_default_flags = ['members', 'show-inheritance']
+
+graphviz_output_format = 'svg'
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
@@ -153,11 +128,10 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 # html_theme_options = {}
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 
 # -- Options for HTMLHelp output ------------------------------------------
