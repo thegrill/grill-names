@@ -48,6 +48,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.inheritance_diagram',
               'sphinx.ext.autosectionlabel',
               'sphinx_copybutton',
+              'sphinx_toggleprompt',
               'sphinx_togglebutton',
               'm2r2',
               'sphinx_autodoc_typehints']

@@ -178,7 +178,6 @@ class CGAssetFile(CGAsset, naming.PipeFile):
     """Versioned files in the pipeline for a CGAsset.
 
     Example:
-
         >>> name = CGAssetFile.get_default(version=7)
         >>> name.suffix
         'ext'
