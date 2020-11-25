@@ -168,7 +168,7 @@ html_theme_options = {
     # 'description': 'A sphinx theme designed by Typlog.',
     # 'github_user': 'typlog',
     # 'github_repo': 'sphinx-typlog-theme',
-    'meta_html': '<meta name="generator" content="sphinx">',
+    # 'meta_html': '<meta name="generator" content="sphinx">',
     'description': 'Your project description',
     'github_user': 'thegrill',
     'github_repo': 'grill-names'
@@ -177,7 +177,6 @@ html_theme_options = {
 html_sidebars = {
     '**': [
         'github.html',
-        ...
     ]
 }
 # Add any paths that contain custom static files (such as style sheets) here,
