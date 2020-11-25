@@ -4,16 +4,14 @@ CGAsset
 .. toctree::
     :maxdepth: 4
 
-.. admonition:: Here's my titlezz
+.. admonition:: Inheritance Diagram
    :class: dropdown, hint
 
-   My notezz
+   .. inheritance-diagram:: grill.names.CGAsset
 
-.. toggle:: Here's my title
+.. admonition:: Inheritance Diagram
+   :class: dropdown, note
 
-    Inheritance DiagraSSSm for grill.names.CGAsset
-
-    .. inheritance-diagram:: grill.names.CGAsset
-
+   .. inheritance-diagram:: grill.names.CGAsset
 
 .. autoclass:: grill.names.CGAsset
