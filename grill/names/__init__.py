@@ -81,7 +81,7 @@ class DateTimeFile(naming.File, DefaultName):
     .. note::
         When getting a new default name, current ISO time at the moment of execution is used.
 
-    Example::
+    Example:
         >>> tf = DateTimeFile.get_default(suffix='txt')
         >>> tf.day
         '28'
@@ -177,8 +177,7 @@ class CGAsset(DefaultName):
 class CGAssetFile(CGAsset, naming.PipeFile):
     """Versioned files in the pipeline for a CGAsset.
 
-    Basic use::
-
+    Example:
         >>> name = CGAssetFile.get_default(version=7)
         >>> name.suffix
         'ext'
@@ -201,7 +200,7 @@ class CGAssetFile(CGAsset, naming.PipeFile):
 
 class LifeTR(naming.Name):
     """Taxonomic Rank used for biological classification.
-    
+
     """
     config = {k: v['pattern'] for k, v in ids.LifeTR.items()}
     __doc__ += '\n' + _table_from_id(ids.LifeTR) + '\n'
