@@ -6,4 +6,4 @@
 [![PyPI version](https://badge.fury.io/py/grill-names.svg)](https://badge.fury.io/py/grill-names)
 [![PyPI](https://img.shields.io/pypi/pyversions/grill-names.svg)](https://pypi.python.org/pypi/grill-names)
 
-The `grill-names`package offers [Name](https://naming.readthedocs.io/en/latest/Name.html) objects for digital content creation.
+The `grill-names` package offers [Name](https://naming.readthedocs.io/en/latest/Name.html) objects for digital content creation.
