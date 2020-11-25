@@ -5,7 +5,7 @@ CGAsset
     :maxdepth: 4
 
 .. admonition:: Here's my title
-   :class: dropdown, note
+   :class: dropdown, info
 
    My note
 
