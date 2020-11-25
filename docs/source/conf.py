@@ -44,56 +44,21 @@ extensions = ['sphinx.ext.autodoc',
               # 'sphinx.ext.ifconfig',
               'sphinx.ext.viewcode',
               # 'sphinx.ext.githubpages',
-              # 'sphinx.ext.graphviz',
+              'sphinx.ext.graphviz',
               'sphinx.ext.inheritance_diagram',
               'sphinx.ext.autosectionlabel',
-              # 'sphinx_toggleprompt',
-              # 'sphinx_copybutton',
+              'sphinx_toggleprompt',
+              'sphinx_copybutton',
+              'sphinx_togglebutton',
               'sphinx_autodoc_typehints']
 
 # Offset to play well with copybutton
 toggleprompt_offset_right = 25
 
 # Add any paths that contain templates here, relative to this directory.
-# templates_path = ['_templates']
 templates_path = ['_templates']
 
 # graphviz_dot = r'B:\__appdata__\graphviz\bin\dot.exe'
-# graphviz_dot_args = ['- rankdir LR']
-# graphviz_dot_args = ['-Lg']
-# graphviz_dot_args = [
-#     '-Gbgcolor=transparent',
-#     '-Gfontcolor=#2573a7',
-#     # '-Nshape=oval',
-#     # '-Nshape=circle',
-#     '-Grankdir=TB',
-#     # '-Gstyle=filled',
-#     # '-Gfillcolor=yellow;0.3:blue'
-#     # '-Gperipheries=1',
-#     # '-Ncolor=#4399FF'
-#     # '-Nstyle=filled',
-#     # '-Nfillcolor=red'
-#     '-Ncolor=#2573a7',
-#     # '-Nstyle="filled"',
-#     # '-Ncolor="blue"',
-#     # '-Nstyle="filled" -Nfillcolor="#ddddff"',
-#     # '-Nstyle=filled',
-#     # '-Nbgcolor=#2980b9',
-#     # '-Nfillcolor=red',
-#     # '-Nstyle=filled',
-#     '-Ecolor=#2573a7',
-#     # '-Ecolor=#4399FF',
-#     # '-Gbgcolor=# fcfcfc'
-# # '-Lg'
-# # '-Nshape=box'
-# # '-Ncolor=black'
-# # '-Gbgcolor=transparent', '-Nshape=sphere', '-Nfontname=courier'
-# # '-Gfontname=Simsun', '-Efontname=Simsun', '-Nfontname=Simsun'
-# # '-s32',
-# # '-Gratio=compress'
-# # '-Gsize=8.0,12.0',
-# # '-Ncolor=#465158'
-# ]
 # inheritance_graph_attrs = dict(rankdir="LR", size='"6.0, 8.0"',fontsize=14, ratio='compress')
 inheritance_graph_attrs = dict(rankdir="TB", bgcolor='transparent')
 
@@ -155,30 +120,13 @@ todo_include_todos = True
 # a list of builtin themes.
 #
 # html_theme = 'alabaster'
-html_theme = 'sphinx_typlog_theme'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
-html_theme_options = {
-    # 'color': '#E8371A',
-    # 'logo': 'typlog-512.png',
-    # 'description': 'A sphinx theme designed by Typlog.',
-    # 'github_user': 'typlog',
-    # 'github_repo': 'sphinx-typlog-theme',
-    # 'meta_html': '<meta name="generator" content="sphinx">',
-    'description': 'Your project description',
-    'github_user': 'thegrill',
-    'github_repo': 'grill-names'
-    # 'warning': 'This is a global <a href="#">warnning</a> message',
-}
-html_sidebars = {
-    '**': [
-        'github.html',
-    ]
-}
+html_theme_options = {}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
