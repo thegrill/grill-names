@@ -55,6 +55,8 @@ extensions = ['sphinx.ext.autodoc',
 # Offset to play well with copybutton
 toggleprompt_offset_right = 25
 
+togglebutton_hint = ""
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
