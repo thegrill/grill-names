@@ -12,26 +12,26 @@ class TestNames(unittest.TestCase):
         self.assertEqual(name.area, 'model')
         path = Path.joinpath(
             Path(),
-            'demo', '3d', 'abc', 'entity', 'model', 'main', 'atom', 'lead', 'root',
-            'whole', '1', 'demo-3d-abc-entity-model-main-atom-lead-root-whole.1.ext'
+            'demo', '3d', 'abc', 'entity', 'model', 'main', 'atom', 'lead', 'base',
+            'whole', '1', 'demo-3d-abc-entity-model-main-atom-lead-base-whole.1.ext'
         )
         self.assertEqual(Path(path), name.path)
         name.sep = ':'
         self.assertEqual(':', name.sep)
-        self.assertEqual('demo:3d:abc:entity:model:main:atom:lead:root:whole.1.ext', name.get())
+        self.assertEqual('demo:3d:abc:entity:model:main:atom:lead:base:whole.1.ext', name.get())
         name.sep = '.'
         self.assertEqual(name.sep, '.')
-        self.assertEqual('demo.3d.abc.entity.model.main.atom.lead.root.whole.1.ext', name.get())
+        self.assertEqual('demo.3d.abc.entity.model.main.atom.lead.base.whole.1.ext', name.get())
         name.sep = ' '
         name.name = name.get(area='rig', part='leg', output='skin', stream='dev')
         self.assertEqual('rig', name.area)
-        self.assertEqual('demo 3d abc entity rig dev atom lead root leg.skin.1.ext', name.get())
+        self.assertEqual('demo 3d abc entity rig dev atom lead base leg.skin.1.ext', name.get())
 
     def test_cgasset(self):
         self.assertEqual(CGAsset().get(),
                          '{code}-{media}-{kingdom}-{cluster}-{area}-{stream}-{item}-{step}-{variant}-{part}')
         self.assertEqual(CGAsset.get_default().name,
-                         'demo-3d-abc-entity-rnd-main-atom-lead-root-whole')
+                         'demo-3d-abc-entity-rnd-main-atom-lead-base-whole')
 
     def test_lifetr(self):
         domain = 'Eukarya'
