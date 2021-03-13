@@ -78,21 +78,6 @@ class TestNames(unittest.TestCase):
         tf = SubTime("1999-10-28 1-1-1-1 subclassed.txt")
         self.assertEqual("subclassed", tf.extra)
 
-    def test_mro(self):
-        SUFFIX = "abc"
-
-        class TimedAsset(DateTimeFile, CGAssetFile):
-            file_config = naming.NameConfig(dict(suffix=SUFFIX))
-
-            @property
-            def _defaults(self):
-                result = super()._defaults
-                result.update(suffix=SUFFIX)
-                return result
-
-        ta = TimedAsset.get_default(area='test')
-        self.assertEqual(ta.suffix, SUFFIX)
-
     def test_default_suffix(self):
         suf1 = 'abc'
         class TimedAssetFile(DateTimeFile, CGAssetFile):
