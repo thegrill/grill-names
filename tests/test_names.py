@@ -92,3 +92,18 @@ class TestNames(unittest.TestCase):
 
         ta = TimedAsset.get_default(area='test')
         self.assertEqual(ta.suffix, SUFFIX)
+
+    def test_default_suffix(self):
+        suf1 = 'abc'
+        class TimedAssetFile(DateTimeFile, CGAssetFile):
+            DEFAULT_SUFFIX = suf1
+
+        ta = TimedAssetFile.get_default(area='test')
+        self.assertEqual(ta.suffix, suf1)
+
+        suf2 = 'xyz'
+        class TimedAssetFile2(CGAssetFile):
+            DEFAULT_SUFFIX = suf2
+
+        ta = TimedAssetFile2.get_default(area='test')
+        self.assertEqual(ta.suffix, suf2)

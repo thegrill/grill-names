@@ -56,7 +56,17 @@ class DefaultName(naming.Name):
         return name
 
 
-class DateTimeFile(DefaultName, naming.File):
+class DefaultFile(DefaultName, naming.File):
+    DEFAULT_SUFFIX = 'ext'
+
+    @property
+    def _defaults(self):
+        result = super()._defaults
+        result['suffix'] = type(self).DEFAULT_SUFFIX
+        return result
+
+
+class DateTimeFile(DefaultFile):
     """Time based file names respecting iso standard.
 
     ============= ================
@@ -114,7 +124,6 @@ class DateTimeFile(DefaultName, naming.File):
         time_field = {'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond'}
         now = datetime.now()
         result.update({f: getattr(now, f) for f in time_field})
-        result['suffix'] = 'ext'
         return result
 
     def get_pattern_list(self) -> typing.List[str]:
@@ -176,7 +185,7 @@ class CGAsset(DefaultName):
         return result
 
 
-class CGAssetFile(CGAsset, naming.PipeFile):
+class CGAssetFile(CGAsset, DefaultFile, naming.PipeFile):
     """Versioned files in the pipeline for a CGAsset.
 
     Example:
@@ -191,7 +200,7 @@ class CGAssetFile(CGAsset, naming.PipeFile):
     @property
     def _defaults(self):
         result = super()._defaults
-        result.update(version=1, suffix='ext')
+        result.update(version=1)
         return result
 
     def get_path_pattern_list(self) -> typing.List[str]:
