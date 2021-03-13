@@ -56,7 +56,7 @@ class DefaultName(naming.Name):
         return name
 
 
-class DateTimeFile(naming.File, DefaultName):
+class DateTimeFile(DefaultName, naming.File):
     """Time based file names respecting iso standard.
 
     ============= ================
@@ -110,19 +110,19 @@ class DateTimeFile(naming.File, DefaultName):
 
     @property
     def _defaults(self):
+        result = super()._defaults
         time_field = {'year', 'month', 'day', 'hour', 'minute', 'second', 'microsecond'}
         now = datetime.now()
-        return dict(
-            {f: getattr(now, f) for f in time_field},
-            suffix='ext',
-        )
+        result.update({f: getattr(now, f) for f in time_field})
+        result['suffix'] = 'ext'
+        return result
 
     def get_pattern_list(self) -> typing.List[str]:
         """Fields / properties names (sorted) to be used when building names.
 
         Defaults to [`date`, `time`] + keys of this name's config
         """
-        return ["date", "time"] + list(self.config)
+        return ["date", "time"] + super().get_pattern_list()
 
     @property
     def name(self) -> str:
@@ -171,7 +171,9 @@ class CGAsset(DefaultName):
 
     @property
     def _defaults(self):
-        return {k: v['default'] for k, v in ids.CGAsset.items()}
+        result = super()._defaults
+        result.update({k: v['default'] for k, v in ids.CGAsset.items()})
+        return result
 
 
 class CGAssetFile(CGAsset, naming.PipeFile):
