@@ -218,7 +218,9 @@ class CGAssetFile(CGAsset, DefaultFile, naming.PipeFile):
 
 
 class LifeTR(naming.Name):
-    """Taxonomic Rank used for biological classification."""
+    """Taxonomic Rank used for biological classification.
+
+    """
 
     config = {k: v['pattern'] for k, v in ids.LifeTR.items()}
     __doc__ += '\n' + _table_from_id(ids.LifeTR) + '\n'
