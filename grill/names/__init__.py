@@ -37,7 +37,7 @@ def _table_from_id(id_mapping):
 
 
 class DefaultName(naming.Name):
-    """ Inherited by: :class:`grill.names.CGAsset` :class:`grill.names.DateTimeFile`
+    """ Inherited by: :class:`grill.names.CGAsset`
 
     Base class for any Name object that wishes to provide `default` functionality via
     the `get_default` method.
@@ -57,6 +57,14 @@ class DefaultName(naming.Name):
 
 
 class DefaultFile(DefaultName, naming.File):
+    """ Inherited by: :class:`grill.names.DateTimeFile`
+
+    Similar to :class:`grill.names.DefaultName`, provides File Name objects default
+    creation via the `get_default` method.
+
+    Adds an extra `DEFAULT_SUFFIX='ext'` member that will be used when creating objects.
+    """
+
     DEFAULT_SUFFIX = 'ext'
 
     @property
@@ -210,9 +218,8 @@ class CGAssetFile(CGAsset, DefaultFile, naming.PipeFile):
 
 
 class LifeTR(naming.Name):
-    """Taxonomic Rank used for biological classification.
+    """Taxonomic Rank used for biological classification."""
 
-    """
     config = {k: v['pattern'] for k, v in ids.LifeTR.items()}
     __doc__ += '\n' + _table_from_id(ids.LifeTR) + '\n'
 
