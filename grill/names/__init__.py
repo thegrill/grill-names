@@ -6,7 +6,7 @@ import naming
 from grill.tokens import ids
 
 
-def _table_from_id(id_mapping):
+def _table_from_id(token_ids):
     headers = [
         'Token',
         'Pattern',
@@ -14,15 +14,15 @@ def _table_from_id(id_mapping):
         'Description',
     ]
     table_sep = tuple([''] * len(headers))
-    sorter = lambda m: (
+    sorter = lambda value: (
         # cleanup backslashes formatting
-        m["pattern"].replace('\\', '\\\\'),
-        m['default'],
+        value.pattern.replace('\\', '\\\\'),
+        value.default,
         # replace new lines with empty strings to avoid malformed tables.
-        m['description'].replace('\n', ' '),
+        value.description.replace('\n', ' '),
     )
     rows = [table_sep, headers, table_sep]
-    rows.extend([token, *sorter(values)] for token, values in id_mapping.items())
+    rows.extend([token.name, *sorter(token.value)] for token in token_ids)
     rows.append(table_sep)
     max_sizes = [(max(len(i) for i in r)) for r in zip(*rows)]
 
@@ -180,7 +180,7 @@ class CGAsset(DefaultName):
     through their life cycles (e.g. a character, a film, a videogame).
 
     """
-    config = {k: v['pattern'] for k, v in ids.CGAsset.items()}
+    config = {token.name: token.value.pattern for token in ids.CGAsset}
     __doc__ += '\n' + _table_from_id(ids.CGAsset) + '\n'
 
     def __init__(self, *args, sep='-', **kwargs):
@@ -189,7 +189,7 @@ class CGAsset(DefaultName):
     @property
     def _defaults(self):
         result = super()._defaults
-        result.update({k: v['default'] for k, v in ids.CGAsset.items()})
+        result.update({token.name: token.value.default for token in ids.CGAsset})
         return result
 
 
@@ -221,8 +221,7 @@ class LifeTR(naming.Name):
     """Taxonomic Rank used for biological classification.
 
     """
-
-    config = {k: v['pattern'] for k, v in ids.LifeTR.items()}
+    config = {token.name: token.value.pattern for token in ids.LifeTR}
     __doc__ += '\n' + _table_from_id(ids.LifeTR) + '\n'
 
     def __init__(self, *args, sep=':', **kwargs):
