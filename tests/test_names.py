@@ -92,3 +92,12 @@ class TestNames(unittest.TestCase):
 
         ta = TimedAssetFile2.get_default(area='test')
         self.assertEqual(ta.suffix, suf2)
+
+
+class TestUsdAsset(unittest.TestCase):
+    def test_usd_asset(self):
+        assetname = UsdAsset.get_anonymous(stream='test', suffix='usdz')
+        self.assertEqual(assetname.stream, 'test')
+        self.assertEqual(assetname.suffix, 'usdz')
+        with self.assertRaises(ValueError):
+            UsdAsset.get_anonymous(suffix='xyz')
