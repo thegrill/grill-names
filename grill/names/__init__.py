@@ -7,7 +7,12 @@ import collections
 from datetime import datetime
 
 import naming
-from pxr import Sdf
+try:
+    from pxr import Sdf
+    _USD_SUFFIXES = tuple(ext for ext in Sdf.FileFormat.FindAllFileFormatExtensions() if ext.startswith('usd'))
+except ImportError:  # Don't fail if Sdf is not importable to facilitate portability
+    _USD_SUFFIXES = ("usd", "usda", "usdc", "usdz", "usdt")
+
 from grill.tokens import ids
 
 
@@ -254,7 +259,7 @@ class UsdAsset(CGAssetFile):
     DEFAULT_SUFFIX = 'usda'
     file_config = naming.NameConfig(
         # NOTE: limit to only extensions starting with USD (some environments register other extensions untested by the grill)
-        {'suffix': "|".join(ext for ext in Sdf.FileFormat.FindAllFileFormatExtensions() if ext.startswith('usd'))}
+        {'suffix': "|".join(_USD_SUFFIXES)}
     )
 
     @classmethod
