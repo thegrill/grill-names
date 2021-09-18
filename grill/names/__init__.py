@@ -1,8 +1,13 @@
 from __future__ import annotations
+
+import uuid
 import typing
+import itertools
+import collections
 from datetime import datetime
 
 import naming
+from pxr import Sdf
 from grill.tokens import ids
 
 
@@ -194,7 +199,9 @@ class CGAsset(DefaultName):
 
 
 class CGAssetFile(CGAsset, DefaultFile, naming.PipeFile):
-    """Versioned files in the pipeline for a CGAsset.
+    """Inherited by: :class:`grill.names.UsdAsset`
+
+    Versioned files in the pipeline for a CGAsset.
 
     Example:
         >>> name = CGAssetFile.get_default(version=7)
@@ -215,6 +222,58 @@ class CGAssetFile(CGAsset, DefaultFile, naming.PipeFile):
         pattern = super().get_pattern_list()
         pattern.append('version')
         return pattern
+
+
+class UsdAsset(CGAssetFile):
+    """Specialized :class:`grill.names.CGAssetFile` name object for USD asset resources.
+
+    .. admonition:: Inheritance Diagram for UsdAsset
+        :class: dropdown, note
+
+        .. inheritance-diagram:: grill.names.UsdAsset
+
+    This is the currency for USD asset identifiers in the pipeline.
+
+    Examples:
+        >>> asset_id = UsdAsset.get_default()
+        >>> asset_id
+        UsdAsset("demo-3d-abc-entity-rnd-main-atom-lead-base-whole.1.usda")
+        >>> asset_id.suffix = 'usdc'
+        >>> asset_id.version = 42
+        >>> asset_id
+        UsdAsset("demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.usdc")
+        >>> asset_id.suffix = 'abc'
+        Traceback (most recent call last):
+        ...
+        ValueError: Can't set invalid name 'demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.abc' on UsdAsset("demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.usdc"). Valid convention is: '{code}-{media}-{kingdom}-{cluster}-{area}-{stream}-{item}-{step}-{variant}-{part}.{pipe}.{suffix}' with pattern: '^(?P<code>\w+)\-(?P<media>\w+)\-(?P<kingdom>\w+)\-(?P<cluster>\w+)\-(?P<area>\w+)\-(?P<stream>\w+)\-(?P<item>\w+)\-(?P<step>\w+)\-(?P<variant>\w+)\-(?P<part>\w+)(?P<pipe>(\.(?P<output>\w+))?\.(?P<version>\d+)(\.(?P<index>\d+))?)(\.(?P<suffix>sdf|usd|usda|usdc|usdz))$'
+
+    .. seealso::
+        :class:`grill.names.CGAsset` for a description of available fields, :class:`naming.Name` for an overview of the core API.
+
+    """
+    DEFAULT_SUFFIX = 'usda'
+    file_config = naming.NameConfig(
+        # NOTE: limit to only extensions starting with USD (some environments register other extensions untested by the grill)
+        {'suffix': "|".join(ext for ext in Sdf.FileFormat.FindAllFileFormatExtensions() if ext.startswith('usd'))}
+    )
+
+    @classmethod
+    def get_anonymous(cls, **values) -> UsdAsset:
+        """Get an anonymous :class:`UsdAsset` name with optional field overrides.
+
+        Useful for situations where a temporary but valid identifier is needed.
+
+        :param values: Variable keyword arguments with the keys referring to the name's
+            fields which will use the given values.
+
+        Example:
+            >>> UsdAsset.get_anonymous(stream='test')
+            UsdAsset("4209091047-34604-19646-169-123-test-4209091047-34604-19646-169.1.usda")
+
+        """
+        keys = cls.get_default().get_pattern_list()
+        anon = itertools.cycle(uuid.uuid4().fields)
+        return cls.get_default(**collections.ChainMap(values, dict(zip(keys, anon))))
 
 
 class LifeTR(naming.Name):
