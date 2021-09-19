@@ -7,3 +7,4 @@ DateTimeFile
    .. inheritance-diagram:: grill.names.DateTimeFile
 
 .. autoclass:: grill.names.DateTimeFile
+    :members:

@@ -64,7 +64,6 @@ intersphinx_mapping = {
 # ----- hoverxref -----
 hoverxref_auto_ref = True
 hoverxref_intersphinx = [
-  'grill.names',
   'naming',
 ]
 hoverxref_intersphinx_types = dict.fromkeys(intersphinx_mapping, 'tooltip')
