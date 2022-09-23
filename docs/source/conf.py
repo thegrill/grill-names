@@ -63,9 +63,7 @@ intersphinx_mapping = {
 }
 # ----- hoverxref -----
 hoverxref_auto_ref = True
-hoverxref_intersphinx = [
-  'naming',
-]
+hoverxref_intersphinx = list(set(intersphinx_mapping) - {'python'})
 hoverxref_intersphinx_types = dict.fromkeys(intersphinx_mapping, 'tooltip')
 hoverxref_domains = ['py']
 
