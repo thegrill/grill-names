@@ -256,7 +256,7 @@ class UsdAsset(CGAssetFile):
         :class:`grill.names.CGAsset` for a description of available fields, :class:`naming.Name` for an overview of the core API.
 
     """
-    DEFAULT_SUFFIX = 'usda'
+    DEFAULT_SUFFIX = 'usd'
     file_config = naming.NameConfig(
         # NOTE: limit to only extensions starting with USD (some environments register other extensions untested by the grill)
         {'suffix': "|".join(_USD_SUFFIXES)}
