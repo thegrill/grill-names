@@ -1,7 +1,7 @@
 language: python
 python:
   - 3.9
-  - 3.10
+  - "3.10"  # https://dev.to/hugovk/the-python-3-1-problem-85g
 install:
   - pip install -U pytest pytest-cov coveralls  # https://github.com/creare-com/podpac/issues/347
   - python setup.py install
