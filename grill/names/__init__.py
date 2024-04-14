@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import uuid
 import typing
+import textwrap
 import itertools
 import collections
 from datetime import datetime
@@ -43,7 +44,7 @@ def _table_from_id(token_ids):
             f"{{:{f'{filler}'}{f'{size}'}}}".format(i)
             for size, i in zip(max_sizes, r))
         )
-    return '\n'.join(format_rows)
+    return textwrap.indent('\n'.join(format_rows), prefix="    ")
 
 
 class DefaultName(naming.Name):
@@ -89,7 +90,7 @@ class DateTimeFile(DefaultFile):
 
     ============= ================
     **Config:**
-    ------------------------------
+    ==============================
     *year*        Between :py:data:`datetime.MINYEAR` and :py:data:`datetime.MAXYEAR` inclusive.
     *month*       Between 1 and 12 inclusive.
     *day*         Between 1 and the number of days in the given month of the given year.
@@ -101,7 +102,7 @@ class DateTimeFile(DefaultFile):
 
     ======  ============
     **Composed Fields:**
-    --------------------
+    ====================
     *date*  `year` `month` `day`
     *time*  `hour` `minute` `second` `microsecond`
     ======  ============
@@ -250,7 +251,7 @@ class UsdAsset(CGAssetFile):
         >>> asset_id.suffix = 'abc'
         Traceback (most recent call last):
         ...
-        ValueError: Can't set invalid name 'demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.abc' on UsdAsset("demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.usdc"). Valid convention is: '{code}-{media}-{kingdom}-{cluster}-{area}-{stream}-{item}-{step}-{variant}-{part}.{pipe}.{suffix}' with pattern: '^(?P<code>\w+)\-(?P<media>\w+)\-(?P<kingdom>\w+)\-(?P<cluster>\w+)\-(?P<area>\w+)\-(?P<stream>\w+)\-(?P<item>\w+)\-(?P<step>\w+)\-(?P<variant>\w+)\-(?P<part>\w+)(?P<pipe>(\.(?P<output>\w+))?\.(?P<version>\d+)(\.(?P<index>\d+))?)(\.(?P<suffix>sdf|usd|usda|usdc|usdz))$'
+        ValueError: Can't set invalid name 'demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.abc' on UsdAsset("demo-3d-abc-entity-rnd-main-atom-lead-base-whole.42.usdc"). Valid convention is: '{code}-{media}-{kingdom}-{cluster}-{area}-{stream}-{item}-{step}-{variant}-{part}.{pipe}.{suffix}' with pattern: '^(?P<code>...(?P<suffix>sdf|usd|usda|usdc|usdz))$'
 
     .. seealso::
         :class:`grill.names.CGAsset` for a description of available fields, :class:`naming.Name` for an overview of the core API.
