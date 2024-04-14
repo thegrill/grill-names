@@ -73,7 +73,7 @@ class DefaultFile(DefaultName, naming.File):
     Similar to :class:`grill.names.DefaultName`, provides File Name objects default
     creation via the `get_default` method.
 
-    Adds an extra `DEFAULT_SUFFIX='ext'` member that will be used when creating objects.
+    Adds an extra ``DEFAULT_SUFFIX='ext'`` member that will be used when creating objects.
     """
 
     DEFAULT_SUFFIX = 'ext'
