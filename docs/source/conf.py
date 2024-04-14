@@ -91,7 +91,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = '👨‍🍳 grill-names'
+project = '👨‍🍳'
 copyright = f'{datetime.now().year}, The Grill'
 author = 'Christian López Barrón'
 
@@ -156,7 +156,7 @@ html_theme_options = {
     "github_url": "https://github.com/thegrill/grill-names",
     "globaltoc_expand_depth": 2,
     "toctree_collapse": True,
-    "toctree_titles_only": False,
+    "toctree_titles_only": True,
 }
 
 # -- Options for LaTeX output ---------------------------------------------
