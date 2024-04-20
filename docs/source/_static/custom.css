@@ -1,8 +1,7 @@
 .wy-table-responsive {
     white-space: normal !important;
     color: red !important;
-    background-color: green !important;
+    background-color: var(--yue-c-row-background);
     margin-bottom: 240px;
     overflow: auto;
 }
-.rst-content table.docutils caption { text-align: right; font-size: 100%; }
