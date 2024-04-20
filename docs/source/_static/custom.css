@@ -1,0 +1,11 @@
+/* This is due to online RTD adding a wrapper to tables, which mess up shibuya's table style, adding space at the top and below each table.
+shibuya 2024.4.8+ exposed this issue.
+See related issues:
+   https://github.com/readthedocs/sphinx_rtd_theme/pull/1218
+   https://github.com/readthedocs/sphinx_rtd_theme/issues/1179
+   https://github.com/readthedocs/sphinx_rtd_theme/issues/117
+*/
+table.docutils {
+    margin-top: 0;
+    margin-bottom: 0;
+}
