@@ -1,5 +1,4 @@
 .wy-table-responsive {
-    color: red !important;
-    background-color: var(--color-surface-accent);
-    margin-bottom: 240px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
