@@ -5,4 +5,4 @@
     margin-bottom: 240px;
     overflow: auto;
 }
-.rst-content table.docutils caption { text-align: left; font-size: 100%; }
+.rst-content table.docutils caption { text-align: right; font-size: 100%; }
