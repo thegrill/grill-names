@@ -1,4 +1,11 @@
 .wy-table-responsive {
     margin-bottom: 50px;
-    margin-top: 50px;
 }
+
+.wy-table-responsive th {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height: 0px;
+}
+
+
