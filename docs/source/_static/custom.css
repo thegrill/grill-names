@@ -9,9 +9,9 @@
 }
 
 
-.wy-table-responsive table tr:first-child {
-    background-color: red;
+.wy-table-responsive tr:first-child {
+    background-color: blue;
 }
-.wy-table-responsive table tr:last-child {
-    background-color: green;
+.wy-table-responsive tr:last-child {
+    background-color: yellow;
 }
