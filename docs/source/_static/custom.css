@@ -1,4 +1,5 @@
-/* This is because online RTD have an additional wrapping of tables that mess up with this theme's table style, adding space at the top and below the table.
+/* This is due to online RTD adding a wrapper to tables, which mess up shibuya's table style, adding space at the top and below each table.
+shibuya 2024.4.8+ exposed this issue.
 See related issues:
    https://github.com/readthedocs/sphinx_rtd_theme/pull/1218
    https://github.com/readthedocs/sphinx_rtd_theme/issues/1179
