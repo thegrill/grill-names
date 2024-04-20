@@ -2,6 +2,7 @@
     white-space: normal;
     color: red !important;
     background-color: green !important;
+    margin-bottom: 240px;
 }
 .wy-table-responsive { overflow: auto; }
 .rst-content table.docutils caption { text-align: left; font-size: 100%; }
