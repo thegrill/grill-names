@@ -12,3 +12,6 @@
 .wy-table-responsive table tr:first-child {
     background-color: red;
 }
+.wy-table-responsive table tr:last-child {
+    background-color: green;
+}
