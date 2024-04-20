@@ -1,11 +1,13 @@
 .wy-table-responsive {
     margin-bottom: 50px;
+    background-color: yellow;
 }
 
 .wy-table-responsive th {
     margin-bottom: 0px;
     margin-top: 0px;
     height: 0px;
+    background-color: red;
 }
 
 
@@ -13,5 +15,5 @@
     background-color: blue;
 }
 .wy-table-responsive tr:last-child {
-    background-color: yellow;
+    background-color: green;
 }
