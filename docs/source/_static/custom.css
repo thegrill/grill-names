@@ -1,9 +1,9 @@
-.table {
+.docutils {
     margin-bottom: 50px;
     background-color: yellow;
 }
 
-.table th {
+.docutils th {
     margin-bottom: 0px;
     margin-top: 0px;
     height: 0px;
@@ -11,9 +11,9 @@
 }
 
 
-.table tr:first-child {
+.docutils tr:first-child {
     background-color: blue;
 }
-.table tr:last-child {
+.docutils tr:last-child {
     background-color: green;
 }
