@@ -1,7 +1,5 @@
-.wy-table-responsive {
-    white-space: normal !important;
+.wy-table-responsive th {
     color: red !important;
-    background-color: var(--yue-c-row-background);
+    background-color: var(--color-surface-accent);
     margin-bottom: 240px;
-    overflow: auto;
 }
