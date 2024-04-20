@@ -1,3 +1,4 @@
 .wy-table-responsive {
-    all: unset;
+    color: red !important;
+    background-color: green !important;
 }
