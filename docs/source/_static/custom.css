@@ -1,3 +1,4 @@
+/* This is because online RTD have an additional wrapping of tables that mess up with this theme's table style, adding space at the top and below the table */
 table.docutils {
     margin-top: 0;
     margin-bottom: 0;
