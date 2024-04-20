@@ -1,4 +1,7 @@
-.wy-table-responsive {
+.wy-table-responsive table td {
+    white-space: normal;
     color: red !important;
     background-color: green !important;
 }
+.wy-table-responsive { overflow: auto; }
+.rst-content table.docutils caption { text-align: left; font-size: 100%; }
