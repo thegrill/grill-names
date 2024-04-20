@@ -1,11 +1,5 @@
-.docutils {
-    margin-bottom: 100px;
-    background-color: yellow;
-}
-
-.docutils th {
-    margin-bottom: 100px;
-    margin-top: 100px;
-    height: 0px;
+table.docutils {
+    margin-top: 0;
+    margin-bottom: 0;
     background-color: red;
 }
