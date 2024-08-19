@@ -91,7 +91,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = '👨‍🍳'
+project = 'grill.names'
 copyright = f'{datetime.now().year}, The Grill'
 author = 'Christian López Barrón'
 
