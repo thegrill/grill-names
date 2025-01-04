@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import uuid
-import typing
-import textwrap
 import itertools
 import collections
 from datetime import datetime
@@ -25,15 +23,24 @@ def _table_from_id(token_ids):
         'Description',
     ]
     table_sep = tuple([''] * len(headers))
-    sorter = lambda value: (
+    entries_from_value = lambda value: (
         # cleanup backslashes formatting
-        value.pattern.replace('\\', '\\\\'),
+        # and add a newline for every | operator in the pattern for readability
+        value.pattern.replace('\\', '\\\\').replace("|", "|\n"),
         value.default,
-        # replace new lines with empty strings to avoid malformed tables.
-        value.description.replace('\n', ' '),
+        value.description,
     )
     rows = [table_sep, headers, table_sep]
-    rows.extend([token.name, *sorter(token.value)] for token in token_ids)
+    for token in token_ids:
+        lines_from_entries = [entry.split("\n") for entry in itertools.chain([token.name], entries_from_value(token.value))]
+        # to support newlines, keep track of the highest line count and fill cells without value with an empty string
+        lines_filler = [""] * len(max(lines_from_entries, key=len))
+        rows.extend(zip(*list(
+            # entries with more than one line will be prefixed with "| " which means a newline in rst
+            # zip the entries to have all rows aligned per newline to be added to the table
+            [''.join(zipped) for zipped in itertools.zip_longest(lines_filler, lines if len(lines) == 1 else (f'| {line}' for line in lines), fillvalue='')]
+            for lines in lines_from_entries
+        )))
     rows.append(table_sep)
     max_sizes = [(max(len(i) for i in r)) for r in zip(*rows)]
 
@@ -44,7 +51,7 @@ def _table_from_id(token_ids):
             f"{{:{f'{filler}'}{f'{size}'}}}".format(i)
             for size, i in zip(max_sizes, r))
         )
-    return textwrap.indent('\n'.join(format_rows), prefix="    ")
+    return '\n'.join(format_rows)
 
 
 class DefaultName(naming.Name):
@@ -145,7 +152,7 @@ class DateTimeFile(DefaultFile):
         result.update({f: getattr(now, f) for f in time_field})
         return result
 
-    def get_pattern_list(self) -> typing.List[str]:
+    def get_pattern_list(self) -> list[str]:
         """Fields / properties names (sorted) to be used when building names.
 
         Defaults to [`date`, `time`] + keys of this name's config
@@ -224,7 +231,7 @@ class CGAssetFile(CGAsset, DefaultFile, naming.PipeFile):
         result.update(version=1)
         return result
 
-    def get_path_pattern_list(self) -> typing.List[str]:
+    def get_path_pattern_list(self) -> list[str]:
         pattern = super().get_pattern_list()
         pattern.append('version')
         return pattern
