@@ -28,21 +28,19 @@ from datetime import datetime
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.doctest',
-              'sphinx.ext.intersphinx',
-              'sphinx.ext.todo',
-              'sphinx.ext.coverage',
-              'sphinx.ext.viewcode',
-              'sphinx.ext.graphviz',
-              'sphinx.ext.inheritance_diagram',
-              'sphinx.ext.autosectionlabel',
-              "myst_parser",
-              'sphinx_copybutton',
-              'sphinx_toggleprompt',
-              'sphinx_togglebutton',
-              'hoverxref.extension',
-              'sphinx_autodoc_typehints']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.inheritance_diagram',
+    'sphinx.ext.autosectionlabel',
+    "myst_parser",
+    'sphinx_copybutton',
+    'sphinx_toggleprompt',
+    'sphinx_togglebutton',
+    'hoverxref.extension',
+]
 
 # Offset to play well with copybutton
 toggleprompt_offset_right = 35
@@ -138,6 +136,7 @@ html_theme = 'shibuya'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ['_static']
 html_css_files = [
   'custom.css',
 ]
