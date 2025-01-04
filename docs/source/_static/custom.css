@@ -29,7 +29,7 @@ div.xl\:hidden {
 
 /* Since right sidebar is not displayed, re-declare the width criteria for the main area of the docs to be larger */
 .sy-main {
-    width: calc(100% - 20rem); /* each (left and right) sidebar is 18rem width, so now keep only 18 (+ 1 of margin for each side) */
+    width: calc(100% - 18rem); /* each (left and right) sidebar is 18rem width, so now keep only 18 for left one */
     max-width: none;
     box-sizing: border-box;
 }
