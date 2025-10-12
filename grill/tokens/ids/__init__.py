@@ -1,3 +1,4 @@
+import sys
 import enum
 import typing
 import configparser
@@ -23,7 +24,8 @@ def __getattr__(name):
 
 
 def __dir__():
+    # TODO: remove args when in Python-3.12+
+    args = ((__name__,) if sys.version_info < (3, 12) else tuple())
     return tuple(
-        # how to do better?
-        c.split('.cfg')[0] for c in resources.contents(__name__) if c.endswith('.cfg')
+        cfg.stem for cfg in resources.files(*args).glob('*.cfg')
     )
