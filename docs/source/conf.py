@@ -39,7 +39,6 @@ extensions = [
     'sphinx_copybutton',
     'sphinx_toggleprompt',
     'sphinx_togglebutton',
-    'hoverxref.extension',
 ]
 
 # Offset to play well with copybutton
@@ -50,13 +49,6 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
     'naming': ('http://naming.readthedocs.io/en/latest/', None),
 }
-# ----- hoverxref -----
-hoverxref_auto_ref = True
-hoverxref_default_type = 'tooltip'
-
-hoverxref_intersphinx = list(set(intersphinx_mapping) - {'python'})
-hoverxref_intersphinx_types = dict.fromkeys(intersphinx_mapping, hoverxref_default_type)
-hoverxref_domains = ['py']
 
 # ----- sphinx-autodoc-typehints -----
 always_document_param_types = True
