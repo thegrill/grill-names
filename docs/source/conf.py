@@ -43,7 +43,7 @@ extensions = [
 ]
 
 pyrepl_doctest_blocks = "autodoc"
-pyrepl_autodoc_packages = "grill-names,naming"
+pyrepl_autodoc_packages = "_static/wheels/grill-names.whl"
 
 # Offset to play well with copybutton
 toggleprompt_offset_right = 35
