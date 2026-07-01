@@ -18,6 +18,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 from datetime import datetime
+from pathlib import Path
 
 from docutils import nodes
 
@@ -45,7 +46,17 @@ extensions = [
 ]
 
 pyrepl_doctest_blocks = "autodoc"
-pyrepl_autodoc_packages = "_static/wheels/grill-names.whl"
+
+
+def _docs_wheel_packages() -> str | None:
+    """Wheel path for pyrepl micropip (PEP 427 filename required)."""
+    wheels = sorted((Path(__file__).parent / "_static" / "wheels").glob("grill_names-*.whl"))
+    if not wheels:
+        return None
+    return f"_static/wheels/{wheels[-1].name}"
+
+
+pyrepl_autodoc_packages = _docs_wheel_packages()
 
 # Offset to play well with copybutton
 toggleprompt_offset_right = 35

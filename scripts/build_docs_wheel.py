@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-WHEEL_DEST = ROOT / "docs" / "source" / "_static" / "wheels" / "grill-names.whl"
+WHEEL_DEST_DIR = ROOT / "docs" / "source" / "_static" / "wheels"
 
 
 def main() -> None:
@@ -39,10 +39,13 @@ def main() -> None:
     if len(wheels) != 1:
         sys.exit(f"expected one grill_names wheel in {staging}, found: {wheels!r}")
 
-    WHEEL_DEST.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(wheels[0], WHEEL_DEST)
+    WHEEL_DEST_DIR.mkdir(parents=True, exist_ok=True)
+    for old in WHEEL_DEST_DIR.glob("*.whl"):
+        old.unlink()
+    dest = WHEEL_DEST_DIR / wheels[0].name
+    shutil.copy2(wheels[0], dest)
     shutil.rmtree(staging)
-    print(f"copied {wheels[0].name} -> {WHEEL_DEST}")
+    print(f"copied {wheels[0].name} -> {dest}")
 
 
 if __name__ == "__main__":
