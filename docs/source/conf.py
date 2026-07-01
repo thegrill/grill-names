@@ -19,6 +19,8 @@
 #
 from datetime import datetime
 
+from docutils import nodes
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -205,4 +207,22 @@ texinfo_documents = [
      author, 'grillnames', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+
+def _fix_pyrepl_static_paths(app, doctree, docname):
+    """Prefix py-repl _static/ URLs for nested pages (sphinx-pyrepl-web #15)."""
+    prefix = '../' * docname.count('/')
+    if not prefix:
+        return
+    for node in doctree.findall(nodes.raw):
+        if node.get('format') != 'html':
+            continue
+        text = node.astext()
+        if '<py-repl' not in text:
+            continue
+        node.children = [nodes.Text(text.replace('="_static/', f'="{prefix}_static/'))]
+
+
+def setup(app):
+    app.connect('doctree-resolved', _fix_pyrepl_static_paths)
 
