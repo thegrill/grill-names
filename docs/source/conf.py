@@ -39,7 +39,11 @@ extensions = [
     'sphinx_copybutton',
     'sphinx_toggleprompt',
     'sphinx_togglebutton',
+    'sphinx_pyrepl_web',
 ]
+
+pyrepl_doctest_blocks = "autodoc"
+pyrepl_autodoc_packages = "grill-names,naming"
 
 # Offset to play well with copybutton
 toggleprompt_offset_right = 35
