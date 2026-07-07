@@ -2,7 +2,6 @@
 *__pycache__*
 docs/build/
 docs/source/_static/wheels/*.whl
-docs/.wheel-staging/
 build/
 dist/
 grill_names.egg-info/
