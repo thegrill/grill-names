@@ -1,6 +1,7 @@
 .idea/
 *__pycache__*
 docs/build/
+docs/source/_static/wheels/*.whl
 build/
 dist/
 grill_names.egg-info/
